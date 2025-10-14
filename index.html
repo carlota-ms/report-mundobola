@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MundoBola Performance Report: Q1 - Q3 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Define Brand Identity via CSS Variables */
+        :root {
+            --text-color: #24282A;
+            --text-color-light: #52575A;
+            --header-color: #231372;
+            --highlight-color: #20E2C8;
+            --chart-purple: #6106AF;
+            --background-color: #f9fafb; /* bg-gray-50 */
+        }
+
+        /* Apply Base Font, Color, and Smoothing */
+        body {
+            font-family: 'Figtree', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Improved Readability for Paragraphs */
+        p, li, th, td {
+            color: var(--text-color-light);
+        }
+
+        /* Apply Header Font and Styling */
+        h1, h2, h3 {
+            font-family: 'Barlow', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--header-color);
+            letter-spacing: 0.05em; /* Add slight letter spacing */
+        }
+
+        /* Style for the Section Header Highlighters */
+        .section-header::before {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Report Header Container with Shadow */
+        .report-header {
+            background-color: white;
+            padding: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Added subtle shadow */
+        }
+
+        /* Styling for logo */
+        .report-header svg {
+            height: 40px; 
+            width: auto;
+        }
+        
+        /* Branded Button Style with Enhanced Feedback */
+        .report-button {
+            background-color: var(--highlight-color);
+            color: var(--header-color);
+            font-family: 'Barlow', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.75em 1.75em;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .report-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(32, 226, 200, 0.4);
+        }
+
+        /* Main Content Card Style */
+        .content-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        /* Key Metric / Stat Styling */
+        .stat-card {
+            background-color: #f8f9ff;
+            border-left: 4px solid var(--highlight-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Barlow', sans-serif;
+            color: var(--header-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--text-color-light);
+            font-size: 1rem;
+        }
+
+        /* Enhanced Chart Styling */
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            border-left: 2px solid #e5e7eb;
+            border-bottom: 2px solid #e5e7eb;
+            padding-top: 1.5rem;
+        }
+        .chart-container {
+            display: flex;
+            height: 100%;
+            align-items: flex-end;
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .chart-bar-group {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .chart-bar {
+            width: 100%;
+            border-radius: 6px 6px 0 0;
+            transition: filter 0.2s ease;
+            cursor: pointer;
+        }
+        .chart-bar:hover {
+            filter: brightness(1.15);
+        }
+
+        .chart-label {
+            margin-top: 0.75rem;
+            font-family: 'Figtree', sans-serif;
+            font-weight: 600;
+            color: var(--text-color-light);
+            font-size: 0.875rem;
+        }
+
+        /* Table Styling */
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+        .report-table thead {
+            background-color: #f8f9ff;
+        }
+        .report-table th, .report-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            white-space: nowrap;
+        }
+        .report-table th {
+            font-family: 'Barlow', sans-serif;
+            font-weight: 700;
+            color: var(--header-color);
+            text-transform: uppercase;
+        }
+        .report-table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="report-header">
+        <svg viewBox="0 0 250 50" role="img" aria-labelledby="company-logo-title">
+            <title id="company-logo-title">MundoBola Logo</title>
+            <defs>
+                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:var(--header-color);" />
+                    <stop offset="100%" style="stop-color:var(--highlight-color);" />
+                </linearGradient>
+            </defs>
+            <text x="10" y="35" font-family="Barlow, sans-serif" font-size="30" font-weight="700" fill="url(#logoGradient)" text-transform="uppercase">
+                MundoBola
+            </text>
+        </svg>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-4 sm:p-8 lg:p-12">
+        <div class="content-card text-center">
+            <h1 class="text-3xl md:text-5xl mb-2">Performance Analysis</h1>
+            <p class="text-2xl text-text-color-light mb-6">Q1 - Q3 2025 Summary</p>
+            <p class="text-md">Prepared by: <strong>Carlota Sousa</strong> | SEO Department | October 2025</p>
+        </div>
+
+        <div class="content-card">
+            <h2 class="text-2xl mb-6 section-header">Total Traffic Growth</h2>
+            <p class="mb-8">The website experienced substantial growth in user engagement from the first to the third quarter. This positive trend is marked by significant increases in both sessions and pageviews quarter-over-quarter.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stat-card">
+                    <div class="stat-value">1.1M</div>
+                    <div class="stat-label">Q1 Sessions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1.64M</div>
+                    <div class="stat-label">Q1 Pageviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">+37.15%</div>
+                    <div class="stat-label">Growth from Q1 to Q2</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">+40.46%</div>
+                    <div class="stat-label">Growth from Q2 to Q3</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <h2 class="text-2xl mb-6 section-header">Organic Search Performance</h2>
+            <p class="mb-8">Organic search remains a primary driver of traffic, with clicks and impressions showing exceptional growth. The data indicates a consistent upward trend, reinforcing the success of our SEO strategies throughout the year.</p>
+            <div class="overflow-x-auto">
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Quarter</th>
+                            <th>Clicks</th>
+                            <th>Var. (%)</th>
+                            <th>Impressions</th>
+                            <th>Var. (%)</th>
+                            <th>Position</th>
+                            <th>Var. (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q1 2025</td>
+                            <td>190,716</td>
+                            <td>-</td>
+                            <td>14,105,336</td>
+                            <td>-</td>
+                            <td>9.83</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Q2 2025</td>
+                            <td>312,169</td>
+                            <td class="text-green-600 font-semibold">64%</td>
+                            <td>28,572,951</td>
+                            <td class="text-green-600 font-semibold">103%</td>
+                            <td>8.72</td>
+                            <td class="text-green-600 font-semibold">-1.11</td>
+                        </tr>
+                        <tr>
+                            <td>Q3 2025</td>
+                            <td>594,105</td>
+                            <td class="text-green-600 font-semibold">90%</td>
+                            <td>56,328,565</td>
+                            <td class="text-green-600 font-semibold">97%</td>
+                            <td>9.18</td>
+                            <td class="text-red-600 font-semibold">+0.46</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-8">
+                <a href="#" class="report-button">See Full Data</a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="text-2xl mb-6 section-header">Affiliate Clicks by Brand</h2>
+            <p class="mb-8">Affiliate marketing efforts have yielded impressive results, with click-throughs growing exponentially each quarter. Q2 saw a doubling of clicks from Q1, followed by another strong 70% increase in Q3.</p>
+            <div>
+                <h3 class="text-xl mb-4 text-center">Quarterly Affiliate Clicks</h3>
+                <div class="chart-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-bar-group">
+                            <div class="chart-bar" style="height: 27%; background-color: var(--header-color);" title="Q1: 145 Clicks"></div>
+                            <div class="chart-label">Q1: 145 Clicks</div>
+                        </div>
+                        <div class="chart-bar-group">
+                            <div class="chart-bar" style="height: 59%; background-color: var(--chart-purple);" title="Q2: 313 Clicks (+115%)"></div>
+                            <div class="chart-label">Q2: 313 Clicks (+115%)</div>
+                        </div>
+                        <div class="chart-bar-group">
+                           <div class="chart-bar" style="height: 100%; background-color: var(--highlight-color);" title="Q3: 531 Clicks (+70%)"></div>
+                           <div class="chart-label">Q3: 531 Clicks (+70%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="text-2xl mb-6 section-header">Strategy & The Evergreen Proposal</h2>
+            <p class="mb-8">Our strategy focuses on scaling conversions and enhancing site authority. A key proposal involves transforming time-sensitive prediction content into valuable, long-term "evergreen" assets.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl mb-4">Strategic Initiatives for H2</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Increase betting content production to 3x/week.</li>
+                        <li>Continue optimizing legacy evergreen content.</li>
+                        <li>Revise internal linking to boost page authority.</li>
+                        <li>Execute a targeted backlink strategy.</li>
+                        <li>Create dynamic tool pages using AI.</li>
+                        <li>Expand high-conversion pages (e.g., "best of" rankings).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl mb-4">Evergreen Content Transformation</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Phase 1 (Pre-Game):</strong> Publish predictions, stats, and odds.</li>
+                        <li><strong>Phase 2 (Post-Game):</strong> Update the same URL with results, analysis, and post-game statistics.</li>
+                        <li><strong>Key Benefit:</strong> This process preserves URL value, improves UX, strengthens E-E-A-T, and turns thousands of pages into a valuable, interlinked historical archive.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="text-2xl mb-6 section-header">Top Pages by Conversion</h2>
+            <p class="mb-8">The following table details the top-performing pages by affiliate clicks during Q3. Analysis reveals that in-depth posts and reviews are highly effective at driving conversions.</p>
+            <div class="overflow-x-auto">
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Post</th>
+                            <th>Post Type</th>
+                            <th>Affiliate Clicks (Q3)</th>
+                            <th>Avg. Session (sec)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>/apostas-brasil/mines-aposta/</td><td>post</td><td>51</td><td>31.76</td></tr>
+                        <tr><td>/apostas-brasil/casas-de-apostas/</td><td>category</td><td>15</td><td>465.01</td></tr>
+                        <tr><td>/apostas-brasil/analise-alfa-bet/</td><td>review</td><td>14</td><td>47.5</td></tr>
+                        <tr><td>/apostas-brasil/sites-apostas-transmissao-ao-vivo/</td><td>post</td><td>13</td><td>60.69</td></tr>
+                        <tr><td>/apostas-brasil/blaze-apostas-review/</td><td>review</td><td>12</td><td>17.45</td></tr>
+                        <tr><td>/apostas-brasil/analise-bet365/</td><td>review</td><td>11</td><td>42.09</td></tr>
+                        <tr><td>/apostas-brasil/analise-esportes-da-sorte/</td><td>review</td><td>9</td><td>31.68</td></tr>
+                        <tr><td>/apostas-brasil/mines-galera-bet/</td><td>post</td><td>9</td><td>4.71</td></tr>
+                        <tr><td>/apostas-brasil/como-jogar-aviator/</td><td>post</td><td>7</td><td>272.01</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-8">
+                <a href="#" class="report-button">View Complete Table</a>
+            </div>
+        </div>
+
+        <div class="text-center py-8">
+            <p class="text-text-color-light">End of Report.</p>
+        </div>
+
+    </main>
+</body>
+</html>
