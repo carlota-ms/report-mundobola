@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MundoBola Performance Report Q1-Q3 2025</title>
+    <title>MundoBola Performance Report: Q1 - Q3 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Define Brand Identity via CSS Variables */
         :root {
             --text-color: #24282A;
-            --text-color-light: #52575A;
             --header-color: #231372;
             --highlight-color: #20E2C8;
             --chart-purple: #6106AF;
-            --background-color: #f9fafb;
+            --background-color: #f9fafb; /* bg-gray-50 */
         }
 
-        /* Base styles */
+        /* Apply Base Font, Color, and Smoothing */
         body {
             font-family: 'Figtree', sans-serif;
             color: var(--text-color);
@@ -29,11 +27,12 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        p {
-            line-height: 1.65;
-            color: var(--text-color-light);
+        /* Improved Readability for Paragraphs and Text */
+        p, li, th, td, .stat-label {
+            color: var(--text-color);
         }
 
+        /* Apply Header Font and Styling */
         h1, h2, h3 {
             font-family: 'Barlow', sans-serif;
             font-weight: 700;
@@ -41,8 +40,8 @@
             color: var(--header-color);
             letter-spacing: 0.05em;
         }
-        
-        /* Custom UI Components */
+
+        /* Style for the Section Header Highlighters */
         .section-header::before {
             content: '';
             display: block;
@@ -52,25 +51,26 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Report Header Container with Shadow */
         .report-header {
             background-color: white;
             padding: 1.5em;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* Center the logo */
+            height: 70px; /* Fixed height */
             border-bottom: 1px solid #e5e7eb;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
+        /* Styling for logo */
         .report-header svg {
-            height: 45px;
+            height: 45px; /* Control logo size within the header */
             width: auto;
         }
         
+        /* Branded Button Style with Enhanced Feedback */
         .report-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
             background-color: var(--highlight-color);
             color: var(--header-color);
             font-family: 'Barlow', sans-serif;
@@ -81,18 +81,15 @@
             transition: all 0.2s ease-in-out;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-decoration: none;
+            display: inline-block;
         }
 
         .report-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(32, 226, 200, 0.4);
         }
-        
-        .report-button svg {
-            width: 1.25em;
-            height: 1.25em;
-        }
 
+        /* Main Content Card Style */
         .content-card {
             background-color: white;
             border-radius: 12px;
@@ -101,6 +98,7 @@
             margin-bottom: 2rem;
         }
         
+        /* Key Metric / Stat Styling */
         .stat-card {
             background-color: #f8f9ff;
             border-left: 4px solid var(--highlight-color);
@@ -114,296 +112,83 @@
             font-size: 2.5rem;
             font-weight: 700;
         }
-        .stat-label {
-            color: var(--text-color-light);
-            font-size: 1rem;
+
+        /* Enhanced Chart Styling */
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            border-left: 2px solid #e5e7eb;
+            border-bottom: 2px solid #e5e7eb;
+            padding-top: 1.5rem;
         }
-        
-        /* Table Styles */
+        .chart-container {
+            display: flex;
+            height: 100%;
+            align-items: flex-end;
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .chart-bar-group {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .chart-bar {
+            width: 100%;
+            border-radius: 6px 6px 0 0;
+            transition: filter 0.2s ease;
+            cursor: pointer;
+        }
+        .chart-bar:hover {
+            filter: brightness(1.15);
+        }
+
+        .chart-label {
+            margin-top: 0.75rem;
+            font-family: 'Figtree', sans-serif;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.875rem;
+        }
+
+        /* Table Styling */
         .report-table {
             width: 100%;
             border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+        .report-table thead {
+            background-color: #f8f9ff;
         }
         .report-table th, .report-table td {
             padding: 0.75rem 1rem;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
+            white-space: nowrap;
         }
         .report-table th {
             font-family: 'Barlow', sans-serif;
             font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.875rem;
             color: var(--header-color);
+            text-transform: uppercase;
         }
-        .report-table td {
-            font-size: 0.9rem;
-            color: var(--text-color-light);
+        .report-table tbody tr:hover {
+            background-color: #f9fafb;
         }
-        .report-table tr:last-child td {
-            border-bottom: none;
-        }
-        .positive-var { color: #10B981; }
-        .negative-var { color: #EF4444; }
 
     </style>
 </head>
 <body class="bg-gray-50">
 
     <header class="report-header">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 454.1 151.17" role="img" aria-labelledby="company-logo-title">
-             <title id="company-logo-title">Clever Advertising Logo</title>
-            <path d="M204.44.83v58.46h-14.24V24.23l-13.07,35.06h-11.49l-13.16-35.14v35.14h-14.24V.83h16.82l16.4,40.47L187.7.83h16.74Z" fill="#24282A"/><path d="M228.68.83v34.98c0,3.5.86,6.19,2.58,8.08,1.72,1.89,4.25,2.83,7.58,2.83s5.88-.94,7.66-2.83c1.78-1.89,2.66-4.58,2.66-8.08V.83h14.24v34.89c0,5.22-1.11,9.63-3.33,13.24-2.22,3.61-5.2,6.33-8.95,8.16-3.75,1.83-7.92,2.75-12.53,2.75s-8.73-.9-12.37-2.71c-3.64-1.8-6.51-4.52-8.62-8.16-2.11-3.64-3.16-8.06-3.16-13.28V.83h14.24Z" fill="#24282A"/><path d="M325.69,59.29h-14.24l-23.82-36.06v36.06h-14.24V.83h14.24l23.82,36.22V.83h14.24v58.46Z" fill="#24282A"/><path d="M374.07,4.5c4.61,2.44,8.17,5.87,10.7,10.28,2.53,4.41,3.79,9.51,3.79,15.28s-1.26,10.8-3.79,15.24c-2.53,4.44-6.11,7.88-10.74,10.33-4.64,2.44-10.01,3.66-16.11,3.66h-21.9V.83h21.9c6.16,0,11.55,1.22,16.16,3.66ZM369.57,42.55c3-2.94,4.5-7.11,4.5-12.49s-1.5-9.58-4.5-12.57c-3-3-7.19-4.5-12.57-4.5h-6.74v33.98h6.74c5.38,0,9.58-1.47,12.57-4.41Z" fill="#24282A"/><path d="M409.09,56.04c-4.58-2.55-8.22-6.12-10.91-10.7-2.69-4.58-4.04-9.73-4.04-15.45s1.35-10.85,4.04-15.41c2.69-4.55,6.33-8.11,10.91-10.66,4.58-2.55,9.62-3.83,15.11-3.83s10.53,1.28,15.11,3.83,8.19,6.11,10.83,10.66c2.63,4.55,3.96,9.69,3.96,15.41s-1.33,10.87-4,15.45-6.27,8.15-10.83,10.7c-4.55,2.55-9.58,3.83-15.07,3.83s-10.53-1.28-15.11-3.83ZM435.4,42.22c2.8-3.11,4.21-7.22,4.21-12.32s-1.4-9.29-4.21-12.37c-2.8-3.08-6.54-4.62-11.2-4.62s-8.48,1.53-11.28,4.58c-2.8,3.05-4.2,7.19-4.2,12.41s1.4,9.28,4.2,12.37c2.8,3.08,6.56,4.62,11.28,4.62s8.4-1.55,11.2-4.66Z" fill="#24282A"/>
-        </svg>
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.04 124.88" role="img" aria-labelledby="client-logo-title">
-            <title id="client-logo-title">MundoBola Logo</title>
-            <path d="M67.38,46.29c-1.79-.59-3.58-1.16-5.37-1.74v-24.13c.19-.06.4-.09.63-.09,8.72.19,16.62,2.76,23.78,7.7.59.4.82.85.8,1.54-.02,3.92,0,7.84-.02,11.73,0,.29-.15.65-.37.8-3.18,2.35-6.36,4.68-9.57,6.97-.23.17-.68.19-.99.11-2.98-.96-5.94-1.91-8.9-2.89Z" fill="#c3281e"/><path d="M87.26,84.38c.02,3.87,0,7.75.02,11.62,0,.69-.15,1.14-.76,1.56-7.18,5-15.14,7.61-23.89,7.79-.23,0-.43-.02-.62-.08v-24.07c4.81-1.59,9.63-3.16,14.46-4.72.25-.08.65-.03.85.14,3.18,2.25,6.34,4.55,9.49,6.87.25.19.45.59.45.89Z" fill="#c3281e"/><path d="M102.5,50.14c2.27,7.1,2.65,14.3,1.05,21.59-.32,1.45-.39,3.22-1.28,4.21-.83.96-2.58,1.14-3.95,1.59-2.65.89-5.29,1.76-7.95,2.59-.31.11-.82.06-1.06-.12-3.16-2.25-6.3-4.52-9.41-6.84-.25-.19-.42-.63-.43-.96-.03-6.26-.03-12.53-.02-18.79,0-.31.22-.76.46-.96,3.13-2.31,6.26-4.57,9.41-6.84.22-.17.62-.23.86-.15,1.91.59,3.8,1.2,5.71,1.82,0,.02-.03.03-.03.03,1.9.62,3.81,1.2,5.68,1.88.39.14.83.56.96.94Z" fill="#c3281e"/><path d="M62.02.83C27.77.83,0,28.59,0,62.85s27.77,62,62.02,62,62.02-27.76,62.02-62S96.27.83,62.02.83ZM47.57,107.35c-24.49-7.93-38.02-34.46-30.06-58.94,8.02-24.67,34.38-38.01,59.22-29.98,24.1,7.81,37.68,34.39,29.87,58.56-8.01,24.78-34.35,38.33-59.04,30.37Z" fill="#c3281e"/>
-        </svg>
-    </header>
-
-    <main class="max-w-5xl mx-auto p-4 sm:p-8 lg:p-12">
-        <div class="content-card">
-            <h1 class="text-3xl md:text-4xl mb-4">Análise de Performance: MundoBola</h1>
-            <p class="text-lg mb-6">Relatório de SEO cobrindo os três primeiros trimestres de 2025 (1Q - 3Q).</p>
-        </div>
-
-        <div class="content-card">
-            <h2 class="text-2xl mb-6 section-header">Destaques Gerais</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="stat-card">
-                    <div class="stat-value">594K</div>
-                    <div class="stat-label">Cliques Orgânicos (Q3)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">+90%</div>
-                    <div class="stat-label">Crescimento de Cliques (Q3 vs Q2)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">58</div>
-                    <div class="stat-label">Authority Score (DR)</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 class="text-2xl mb-6 section-header">Análise de Tráfego Total</h2>
-            <p class="mb-8">O tráfego orgânico continua a ser a principal fonte de aquisição, representando 64.9% das sessões no Q3. Observa-se um crescimento consistente de tráfego direto, indicando um fortalecimento da marca.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div>
-                    <h3 class="text-xl mb-4">Q1</h3>
-                    <div class="p-4 border rounded-lg bg-gray-50">Image of Q1 Traffic Chart</div>
-                </div>
-                <div>
-                    <h3 class="text-xl mb-4">Q2</h3>
-                    <div class="p-4 border rounded-lg bg-gray-50">Image of Q2 Traffic Chart</div>
-                </div>
-                <div>
-                    <h3 class="text-xl mb-4">Q3</h3>
-                    <div class="p-4 border rounded-lg bg-gray-50">Image of Q3 Traffic Chart</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 class="text-2xl mb-6 section-header">Crescimento Orgânico</h2>
-            <p class="mb-8">O crescimento de cliques e impressões foi exponencial ao longo dos trimestres, com um aumento de 90% nos cliques do Q2 para o Q3. A posição média também melhorou significativamente em Setembro.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl mb-4 text-center">Cliques Orgânicos (Mensal)</h3>
-                    <canvas id="organicClicksChart"></canvas>
-                </div>
-                <div>
-                    <h3 class="text-xl mb-4 text-center">Posição Média (Mensal)</h3>
-                    <canvas id="positionChart"></canvas>
-                </div>
-            </div>
-            
-            <h3 class="text-xl mb-4">Dados Trimestrais</h3>
-            <div class="overflow-x-auto">
-                <table class="report-table">
-                    <thead>
-                        <tr>
-                            <th>Trimestre</th>
-                            <th>Cliques</th>
-                            <th>Var. (%)</th>
-                            <th>Impressões</th>
-                            <th>Var. (%)</th>
-                            <th>Posição</th>
-                            <th>Var.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Q1 2025</td>
-                            <td>190,716</td>
-                            <td>-</td>
-                            <td>14,105,336</td>
-                            <td>-</td>
-                            <td>9.83</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Q2 2025</td>
-                            <td>312,169</td>
-                            <td class="positive-var">+64%</td>
-                            <td>28,572,951</td>
-                            <td class="positive-var">+103%</td>
-                            <td>8.72</td>
-                            <td class="positive-var">-1.11</td>
-                        </tr>
-                        <tr>
-                            <td>Q3 2025</td>
-                            <td>594,105</td>
-                            <td class="positive-var">+90%</td>
-                            <td>56,328,565</td>
-                            <td class="positive-var">+97%</td>
-                            <td>9.18</td>
-                            <td class="negative-var">+0.46</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 class="text-2xl mb-6 section-header">Estratégia & Próximos Passos</h2>
-             <p class="mb-8">A estratégia para o segundo semestre foca-se em quatro pilares principais para capitalizar o crescimento atual e acelerar os resultados de conversão.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-xl mb-4">Pilares Estratégicos (2º Semestre)</h3>
-                    <ul class="list-disc list-inside space-y-3">
-                        <li><span class="font-bold">Escalar Conversão:</span> Aumentar conteúdos de aposta, otimizar posts evergreen e criar mais páginas de "melhores".</li>
-                        <li><span class="font-bold">Aumentar Autoridade:</span> Foco em backlinks e otimização da estrutura de links internos.</li>
-                        <li><span class="font-bold">Criar Ferramentas Dinâmicas:</span> Desenvolver ferramentas de apostas com IA para engajar e reter utilizadores.</li>
-                        <li><span class="font-bold">Testar Conteúdo Evolutivo:</span> Implementar a proposta de transformar "palpites" em ativos evergreen.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl mb-4">Esforço vs. Recompensa (1º Semestre)</h3>
-                    <canvas id="effortRewardChart"></canvas>
-                </div>
-            </div>
-        </div>
-        
-        <div class="content-card bg-indigo-50 border-l-4 border-indigo-400">
-            <h2 class="text-2xl mb-4 section-header">Proposta: Transformar Palpites em Ativos Evergreen</h2>
-            <p class="mb-6">Uma proposta chave para resolver o problema de conteúdo datado ("index bloat") e fortalecer a autoridade do site a longo prazo. O processo consiste em atualizar páginas de "palpites" com os resultados pós-jogo.</p>
-            <h3 class="text-lg font-bold mb-3" style="color: var(--header-color); text-transform: uppercase; font-family: 'Barlow', sans-serif;">Benefícios Chave:</h3>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-green-500 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <div><strong>Preserva o Valor do URL:</strong> A página continua a receber tráfego de cauda longa para pesquisas de resultados.</div>
-                </li>
-                 <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-green-500 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <div><strong>Melhora a UX:</strong> Utilizadores que chegam à página pós-jogo encontram informação útil e atualizada.</div>
-                </li>
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-green-500 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <div><strong>Fortalece o E-E-A-T:</strong> Demonstra conhecimento e transparência, sinais de alta qualidade para o Google.</div>
-                </li>
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-green-500 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <div><strong>Cria uma Forte Rede de Links:</strong> Transforma páginas de valor finito em ativos históricos que geram backlinks.</div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="text-center mt-8">
-            <a href="./Report MundoBola Q1 - Q3 (1).pdf" class="report-button" target="_blank" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
-                Download Relatório Completo (PDF)
-            </a>
-        </div>
-    </main>
-
-    <script>
-        // Data and configuration for Chart.js charts
-        document.addEventListener('DOMContentLoaded', function () {
-            // Chart 1: Organic Clicks
-            new Chart(document.getElementById('organicClicksChart'), {
-                type: 'line',
-                data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro'],
-                    datasets: [{
-                        label: 'Cliques Orgânicos',
-                        data: [88000, 108000, 100000, 128000, 115000, 160000, 275000, 185000, 285000],
-                        borderColor: '#20E2C8',
-                        backgroundColor: 'rgba(32, 226, 200, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: '#20E2C8',
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-
-            // Chart 2: Position
-            new Chart(document.getElementById('positionChart'), {
-                type: 'line',
-                data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro'],
-                    datasets: [{
-                        label: 'Posição Média',
-                        data: [10.9, 8.8, 9.7, 8.0, 9.0, 9.5, 9.9, 9.8, 7.7],
-                        borderColor: '#F97316',
-                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: '#F97316'
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    scales: { y: { reverse: true } } // Lower is better for position
-                }
-            });
-
-            // Chart 3: Effort vs Reward
-            new Chart(document.getElementById('effortRewardChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Reviews', 'Apostas', 'Palpites', 'Notícias'],
-                    datasets: [{
-                        label: 'Nº Publicações/Otimizações',
-                        data: [8, 39, 241, 4824],
-                        backgroundColor: '#231372',
-                        yAxisID: 'y',
-                        order: 2
-                    }, {
-                        label: 'Affiliate Clicks',
-                        data: [90, 147, 33, 268],
-                        borderColor: '#20E2C8',
-                        type: 'line',
-                        fill: false,
-                        tension: 0.2,
-                        yAxisID: 'y1',
-                        order: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            title: { display: true, text: 'Nº Publicações' }
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            title: { display: true, text: 'Affiliate Clicks' },
-                            grid: { drawOnChartArea: false }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        <svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 837.7 245.66" role="img" aria-labelledby="company-logo-title">
+            <title id="company-logo-title">MundoBola Logo</title>
+            <defs>
+                <style>
+                    .cls-1-svg { fill: none; }
+                    .cls-2-svg { clip-path: url(#cl
