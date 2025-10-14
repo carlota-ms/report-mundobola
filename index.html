@@ -1,247 +1,330 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Performance - Mundo Bola Q1-Q3 2025</title>
+    <title>Relatório de Performance 2025 - Mundo Bola</title>
     <meta name="robots" content="noindex, nofollow">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
         :root {
-            --color-text: #24282A;
-            --color-header: #231372;
-            --color-highlight: #20E2C8;
-            --color-accent: #6106AF;
-            --color-positive: #28a745;
-            --font-body: 'Figtree', sans-serif;
-            --font-heading: 'Barlow', sans-serif;
+            --text-color: #24282A;
+            --header-color: #231372;
+            --highlight-color: #20E2C8;
+            --accent-color: #6106AF;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { font-size: 16px; scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--color-text); background-color: #f4f7f9; }
-        .main-header { background-color: #FFFFFF; height: 70px; padding: 1em 1.5em; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; }
-        .main-header .logo { height: 40px; width: auto; }
-        .main-content { padding: 2rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .client-logo-container { display: flex; justify-content: center; align-items: center; margin-bottom: 1rem; }
-        .client-logo-container .client-logo { max-width: 200px; height: auto; }
-        .report-section { background-color: #FFFFFF; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 2rem; }
-        .grid-container { display: grid; gap: 1.5rem; }
-        .grid-2-cols { grid-template-columns: 1fr; }
-        .grid-3-cols { grid-template-columns: 1fr; }
-        @media (min-width: 768px) {
-            .grid-2-cols { grid-template-columns: repeat(2, 1fr); }
-            .grid-3-cols { grid-template-columns: repeat(3, 1fr); }
+        body {
+            font-family: 'Figtree', sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
-        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--color-header); margin-bottom: 1rem; }
-        h1 { font-size: 2.2rem; line-height: 1.2; text-align: center; }
-        h2 { font-size: 1.8rem; border-bottom: 2px solid var(--color-highlight); padding-bottom: 0.5rem; }
-        h3 { font-size: 1.3rem; color: var(--color-accent); text-align: center; margin-top: 1rem; }
-        p { font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; }
-        ul { list-style-position: inside; padding-left: 0; }
-        .highlight { color: var(--color-highlight); }
-        .text-center { text-align: center; }
-        .kpi-card { background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center; }
-        .kpi-value { font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-header); }
-        .kpi-label { font-size: 1rem; margin-bottom: 0.5rem; }
-        .chart-container { position: relative; width: 100%; margin: auto; }
-        .table-wrapper { overflow-x: auto; }
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        .data-table th, .data-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #dee2e6; white-space: nowrap; }
-        .data-table th { background-color: var(--color-header); color: #FFFFFF; font-family: var(--font-heading); text-transform: uppercase; font-size: 0.9rem;}
-        .data-table tr:nth-of-type(even) { background-color: #f8f9fa; }
-        .strategy-card { background-color: #f8f9fa; border-left: 5px solid var(--color-accent); padding: 1.5rem; border-radius: 8px; }
-        .strategy-card h3 { text-align: left; margin-top: 0; }
-        .strategy-card ul { list-style-type: none; padding-left: 0; }
-        .strategy-card li { position: relative; padding-left: 25px; margin-top: 1rem; }
-        .strategy-card li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--color-highlight); font-weight: bold; }
+        /* --- Header & Logo --- */
+        .main-header {
+            background-color: var(--card-background);
+            padding: 1.5em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .main-header img {
+            height: 60px; /* Standard height for logos */
+            width: auto;
+        }
+        /* --- Tipografia --- */
+        h1, h2, h3, h4 {
+            font-family: 'Barlow', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--header-color);
+            position: relative;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2::after {
+            content: ''; display: block; width: 60px; height: 4px;
+            background-color: var(--highlight-color); margin-top: 0.5rem;
+        }
+        /* --- Layout --- */
+        .container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .section {
+            background-color: var(--card-background); margin-bottom: 2rem;
+            padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem; align-items: center;
+        }
+        /* --- Navegação --- */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem; position: sticky;
+            top: 108px; /* Adjusted for header height */
+            z-index: 1000; border-bottom: 1px solid #eee;
+        }
+        .navbar-container {
+            display: flex; justify-content: center; align-items: center;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .navbar a, .dropdown .dropbtn {
+            color: var(--header-color); text-decoration: none; padding: 10px 15px;
+            border-radius: 8px; transition: background-color 0.3s, color 0.3s;
+            font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 15px;
+            border: none; background: none; cursor: pointer;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn.active {
+            background-color: var(--highlight-color); color: var(--header-color);
+        }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content {
+            display: none; position: absolute; background-color: var(--card-background);
+            min-width: 180px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 1; border-radius: 8px; overflow: hidden; top: 100%;
+            left: 50%; transform: translateX(-50%); padding: 5px 0;
+        }
+        .dropdown-content a {
+            color: var(--text-color); padding: 10px 16px; text-decoration: none;
+            display: block; text-align: left; font-weight: normal;
+        }
+        .dropdown-content a:hover { background-color: #f1f1f1; }
+        /* --- TÍTULO DO RELATÓRIO --- */
+        .report-title { text-align: center; margin: 2rem 0 3rem 0; }
+        .report-title p {
+            font-size: 1.2rem; max-width: 600px; margin: 0 auto;
+            color: var(--text-color);
+        }
+        /* --- Componentes --- */
+        .chart-container { position: relative; height: 400px; width: 100%; }
+        .kpi-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; text-align: center;
+        }
+        .kpi {
+            background-color: var(--background-color); padding: 1.5rem;
+            border-radius: 10px; border-left: 5px solid var(--highlight-color);
+        }
+        .kpi .value { font-size: 2.5rem; font-weight: 700; color: var(--header-color); margin: 0.25rem 0; }
+        .kpi .change { font-size: 1rem; }
+        .increase { color: #28a745; }
+        .decrease { color: #dc3545; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 15px; border-bottom: 1px solid #dee2e6; text-align: left; }
+        th {
+            background-color: var(--header-color); color: white; font-family: 'Barlow', sans-serif;
+            text-transform: uppercase; font-size: 0.9em;
+        }
+        tbody tr:nth-child(odd) { background-color: var(--background-color); }
     </style>
 </head>
 <body>
 
-    <header class="main-header"><img src="logo-clever.svg" alt="Clever Advertising Logo" class="logo"></header>
+<header class="main-header">
+    <img src="logo-mundobola.svg" alt="Logo Mundo Bola"> 
+    <img src="logo-clever.svg" alt="Logo Clever Advertising">
+</header>
 
-    <main class="main-content">
-        <div class="client-logo-container"><img src="logo-mundobola.svg" alt="Mundo Bola Logo" class="client-logo"></div>
-        <h1>Análise de Performance <span class="highlight">Q1-Q3 2025</span></h1>
-        <p class="text-center">Dashboard completo com a análise de performance de Janeiro a Setembro de 2025.</p>
-
-        <section class="report-section">
-            <h2>Tráfego Total e Comportamento do Utilizador</h2>
-            <div class="grid-container grid-2-cols">
-                <div class="kpi-card">
-                    <div class="kpi-label">Sessões Totais (Jan-Set)</div>
-                    <div class="kpi-value">1.1M</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Pageviews Totais (Jan-Set)</div>
-                    <div class="kpi-value">1.64M</div>
-                </div>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#geral">Visão Geral</a>
+        <div class="dropdown">
+            <button class="dropbtn">Análise de Tráfego ▼</button>
+            <div class="dropdown-content">
+                <a href="#traffic-sources">Fontes de Tráfego</a>
+                <a href="#user-types">Visitantes Novos vs Recorrentes</a>
             </div>
-            <div class="grid-container grid-3-cols" style="margin-top: 1.5rem;">
-                <div class="kpi-card"><h3>Q1</h3><p>49.5% novos<br>39.1% recorrentes</p></div>
-                <div class="kpi-card"><h3>Q2</h3><p>47.8% novos<br>41.2% recorrentes</p></div>
-                <div class="kpi-card"><h3>Q3</h3><p>46.5% novos<br>44.8% recorrentes</p></div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Performance SEO ▼</button>
+            <div class="dropdown-content">
+                <a href="#organic-clicks">Evolução Orgânica</a>
+                <a href="#organic-table">Tabela de Desempenho</a>
             </div>
-        </section>
-        
-        <section class="report-section">
-            <h2>Performance Orgânica (Search Console)</h2>
-            <div class="grid-container grid-2-cols">
-                <div><h3>Cliques Orgânicos por Mês</h3><canvas id="organicClicksChart"></canvas></div>
-                <div><h3>Posição Média por Mês</h3><canvas id="organicPositionChart"></canvas></div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Afiliados ▼</button>
+            <div class="dropdown-content">
+                <a href="#conversions">Conversões Mensais</a>
+                <a href="#affiliate-clicks">Cliques por Marca</a>
+                <a href="#effort-reward">Esforço vs Recompensa</a>
             </div>
-        </section>
+        </div>
+        <a href="#strategy">Estratégia</a>
+    </div>
+</nav>
 
-        <section class="report-section">
-            <h2>Evolução do Funil de Conversão (Jan-Set)</h2>
-            <div class="chart-container"><canvas id="conversionsChart"></canvas></div>
-        </section>
+<div class="container">
 
-        <section class="report-section">
-            <h2>Cliques de Afiliados por Marca e Trimestre</h2>
-             <div class="grid-container grid-3-cols">
-                <div><h3>Q1: 145 cliques</h3><canvas id="affiliateQ1Chart"></canvas></div>
-                <div><h3>Q2: 313 cliques</h3><canvas id="affiliateQ2Chart"></canvas></div>
-                <div><h3>Q3: 531 cliques</h3><canvas id="affiliateQ3Chart"></canvas></div>
-            </div>
-        </section>
+    <div class="report-title">
+        <h1>Relatório de Performance 2025</h1>
+        <p>Uma análise detalhada dos resultados do <strong>Mundo Bola</strong> de Janeiro a Setembro.</p>
+    </div>
 
-        <section class="report-section">
-            <h2>Top Páginas por Conversão (Q3)</h2>
-            <div class="table-wrapper">
-                <table class="data-table">
-                    <thead><tr><th>URL da Página</th><th>Tipo</th><th>Cliques de Afiliado</th></tr></thead>
-                    <tbody>
-                        <tr><td>/apostas-brasil/mines-aposta/</td><td>Post</td><td>51</td></tr>
-                        <tr><td>/apostas-brasil/casas-de-apostas/</td><td>Categoria</td><td>15</td></tr>
-                        <tr><td>/apostas-brasil/analise-alfa-bet/</td><td>Review</td><td>14</td></tr>
-                        <tr><td>/apostas-brasil/sites-apostas-transmissao-ao-vivo/</td><td>Post</td><td>13</td></tr>
-                        <tr><td>/apostas-brasil/blaze-apostas-review/</td><td>Review</td><td>12</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <section id="geral" class="section">
+        <h2>Visão Geral do Período (Q1-Q3 2025)</h2>
+        <div class="kpi-container">
+            <div class="kpi"><p>Total de Sessões</p><div class="value">1.1M</div></div>
+            <div class="kpi"><p>Total de Pageviews</p><div class="value">1.64M</div></div>
+        </div>
+    </section>
 
-        <section class="report-section">
-            <h2>Estratégia 2º Semestre</h2>
-            <div class="grid-container grid-2-cols">
-                <div class="strategy-card">
-                    <h3>01. Escalar Conversão</h3>
-                    <ul>
-                        <li>Aumentar produção de conteúdos de apostas para 3x por semana.</li>
-                        <li>Continuar otimização de conteúdos evergreen.</li>
-                        <li>Rever estrutura de links internos para aumentar autoridade.</li>
-                        <li>Iniciar estratégia de backlinks.</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <h3>02. Criar Páginas Dinâmicas</h3>
-                    <ul>
-                        <li>Desenvolver ferramentas de apostas com IA para gerar valor e engagement.</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <h3>03. Teste: Conteúdo Evolutivo</h3>
-                    <ul>
-                        <li>Transformar "palpites" em conteúdo histórico para gerar tráfego de cauda longa e preservar o valor do URL.</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <h3>04. Aumentar Autoridade</h3>
-                    <ul>
-                        <li>Continuar a aumentar a autoridade do site (DR atual: 58) através de conteúdo de qualidade e backlinks.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <section class="report-section">
-            <h2>Proposta: Transformação de Palpites em Ativo Evergreen</h2>
-            <div class="grid-container grid-2-cols">
-                <div>
-                    <h3>Fase 1: Pré-Jogo (Conteúdo Finito)</h3>
-                    <p>O palpite original, com estatísticas, escalações, cotações e análise pré-jogo.</p>
-                </div>
-                <div>
-                    <h3>Fase 2: Pós-Jogo (Ativo Evergreen)</h3>
-                    <p>Atualização do conteúdo com o resultado final, estatísticas pós-jogo e uma secção "O nosso palpite acertou?".</p>
-                </div>
-            </div>
-            <h3>Benefícios Estratégicos</h3>
-            <ul>
-                <li><strong>Resolve o Index Bloat:</strong> Evita ter milhares de páginas desatualizadas, sinalizando ao Google um site de alta qualidade.</li>
-                <li><strong>Preserva o Valor do URL:</strong> A página continua a receber tráfego para pesquisas de resultados e histórico de jogos.</li>
-                <li><strong>Fortalece o E-E-A-T:</strong> Demonstra conhecimento, transparência e autoridade.</li>
-                <li><strong>Cria uma Forte Rede de Links Internos:</strong> Transforma páginas "descartáveis" em ativos históricos que podem ser linkados.</li>
-            </ul>
-        </section>
+    <section id="traffic-sources" class="section">
+        <h2>Fontes de Tráfego por Trimestre</h2>
+        <div class="grid">
+            <div><h4>Q1</h4><div class="chart-container"><canvas id="trafficQ1"></canvas></div></div>
+            <div><h4>Q2</h4><div class="chart-container"><canvas id="trafficQ2"></canvas></div></div>
+            <div><h4>Q3</h4><div class="chart-container"><canvas id="trafficQ3"></canvas></div></div>
+        </div>
+    </section>
 
-    </main>
+    <section id="user-types" class="section">
+        <h2>Visitantes Novos vs. Recorrentes</h2>
+        <div class="grid">
+            <div><h4>Q1</h4><div class="chart-container"><canvas id="usersQ1"></canvas></div></div>
+            <div><h4>Q2</h4><div class="chart-container"><canvas id="usersQ2"></canvas></div></div>
+            <div><h4>Q3</h4><div class="chart-container"><canvas id="usersQ3"></canvas></div></div>
+        </div>
+    </section>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const brandColors = {
-            header: '#231372',
-            highlight: '#20E2C8',
-            accent: '#6106AF'
-        };
+    <section id="organic-clicks" class="section">
+        <h2>Evolução da Performance Orgânica (SEO)</h2>
+        <div class="grid">
+            <div><h4>Cliques Orgânicos por Mês</h4><div class="chart-container"><canvas id="organicClicksChart"></canvas></div></div>
+            <div><h4>Posição Média por Mês</h4><div class="chart-container"><canvas id="positionChart"></canvas></div></div>
+        </div>
+    </section>
 
-        // --- Gráfico de Conversões (9 Meses) ---
-        new Chart(document.getElementById('conversionsChart').getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
-                datasets: [
-                    { label: 'FTDs', data: [9, 5, 26, 18, 20, 62, 76, 82, 116], backgroundColor: brandColors.header },
-                    { label: 'Registos', data: [21, 13, 81, 96, 104, 117, 152, 159, 220], backgroundColor: brandColors.accent },
-                    { label: 'Affiliate Clicks', data: [1455, 1280, 3110, 4212, 5311, 6200, 6761, 6306, 7306], backgroundColor: brandColors.highlight, yAxisID: 'y1' }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { position: 'top' } },
-                scales: {
-                    y: { type: 'linear', display: true, position: 'left', beginAtZero: true, title: { display: true, text: 'FTDs e Registos' } },
-                    y1: { type: 'linear', display: true, position: 'right', beginAtZero: true, title: { display: true, text: 'Affiliate Clicks' }, grid: { drawOnChartArea: false } }
-                }
+    <section id="organic-table" class="section">
+        <h2>Tabela de Desempenho Orgânico</h2>
+        <table>
+            <thead><tr><th>Trimestre</th><th>Cliques</th><th>Variação (%)</th><th>Impressões</th><th>Variação (%)</th><th>Posição Média</th><th>Variação</th></tr></thead>
+            <tbody>
+                <tr><td>Q1 2025</td><td>190,716</td><td>-</td><td>14,105,336</td><td>-</td><td>9.83</td><td>-</td></tr>
+                <tr><td>Q2 2025</td><td>312,169</td><td class="increase">64%</td><td>28,572,951</td><td class="increase">103%</td><td>8.72</td><td class="increase">-1.11</td></tr>
+                <tr><td>Q3 2025</td><td>594,105</td><td class="increase">90%</td><td>56,328,565</td><td class="increase">97%</td><td>9.18</td><td class="decrease">+0.46</td></tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section id="conversions" class="section">
+        <h2>Conversões Mensais (FTDs, Registos e Cliques)</h2>
+        <div class="chart-container" style="height: 500px;"><canvas id="conversionsChart"></canvas></div>
+    </section>
+    
+    <section id="affiliate-clicks" class="section">
+        <h2>Cliques de Afiliados por Marca</h2>
+        <div class="grid">
+            <div><h4>Q1 (145 cliques)</h4><div class="chart-container"><canvas id="affiliateQ1"></canvas></div></div>
+            <div><h4>Q2 (313 cliques, <span class="increase">+115%</span>)</h4><div class="chart-container"><canvas id="affiliateQ2"></canvas></div></div>
+            <div><h4>Q3 (531 cliques, <span class="increase">+70%</span>)</h4><div class="chart-container"><canvas id="affiliateQ3"></canvas></div></div>
+        </div>
+    </section>
+    
+    <section id="effort-reward" class="section">
+        <h2>Análise de Esforço vs. Recompensa (1º Semestre)</h2>
+        <div class="grid">
+            <div><h4>Publicações vs. Cliques de Afiliados</h4><div class="chart-container"><canvas id="effortChart"></canvas></div></div>
+            <div><h4>Taxa de Conversão (CR%)</h4><div class="chart-container"><canvas id="crChart"></canvas></div></div>
+        </div>
+    </section>
+
+    <section id="strategy" class="section">
+        <h2>Estratégia para o 2º Semestre</h2>
+        <div class="grid">
+            <div><h4>01. Escalar Conversão</h4><ul><li>Aumentar a produção de conteúdos de apostas.</li><li>Continuar otimização de conteúdos evergreen.</li><li>Rever estrutura de links internos.</li><li>Focar em estratégia de backlinks.</li></ul></div>
+            <div><h4>02. Inovação</h4><ul><li>Criar páginas de ferramentas de apostas com IA.</li><li>Testar conteúdo evolutivo (rankings "os melhores").</li></ul></div>
+            <div><h4>03. Otimização Contínua</h4><ul><li>Transformar "palpites" em conteúdo histórico para preservar o valor do URL e melhorar o E-E-A-T.</li><li>Continuar a aumentar a autoridade do site (DR atual: 58).</li></ul></div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const brandColors = {
+        primary: '#231372', secondary: '#20E2C8', accent: '#6106AF',
+        primary_light: 'rgba(35, 19, 114, 0.7)',
+        secondary_light: 'rgba(32, 226, 200, 0.7)',
+        accent_light: 'rgba(97, 6, 175, 0.7)'
+    };
+
+    // --- GRÁFICOS DE TRÁFEGO ---
+    const trafficOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } };
+    new Chart(document.getElementById('trafficQ1'), { type: 'doughnut', data: { labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'], datasets: [{ data: [52.1, 25.4, 19.9, 2.5], backgroundColor: [brandColors.primary, brandColors.secondary, brandColors.accent, '#ccc'] }] }, options: trafficOptions });
+    new Chart(document.getElementById('trafficQ2'), { type: 'doughnut', data: { labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'], datasets: [{ data: [52, 28.9, 16.6, 2.4], backgroundColor: [brandColors.primary, brandColors.secondary, brandColors.accent, '#ccc'] }] }, options: trafficOptions });
+    new Chart(document.getElementById('trafficQ3'), { type: 'doughnut', data: { labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'], datasets: [{ data: [64.9, 19.6, 13.8, 1.5], backgroundColor: [brandColors.primary, brandColors.secondary, brandColors.accent, '#ccc'] }] }, options: trafficOptions });
+
+    // --- GRÁFICOS DE VISITANTES ---
+    const userOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } };
+    new Chart(document.getElementById('usersQ1'), { type: 'pie', data: { labels: ['Novos', 'Recorrentes'], datasets: [{ data: [49.5, 39.1], backgroundColor: [brandColors.primary, brandColors.secondary] }] }, options: userOptions });
+    new Chart(document.getElementById('usersQ2'), { type: 'pie', data: { labels: ['Novos', 'Recorrentes'], datasets: [{ data: [47.8, 41.2], backgroundColor: [brandColors.primary, brandColors.secondary] }] }, options: userOptions });
+    new Chart(document.getElementById('usersQ3'), { type: 'pie', data: { labels: ['Novos', 'Recorrentes'], datasets: [{ data: [46.5, 44.8], backgroundColor: [brandColors.primary, brandColors.secondary] }] }, options: userOptions });
+
+    // --- GRÁFICOS DE PERFORMANCE ORGÂNICA ---
+    new Chart(document.getElementById('organicClicksChart'), { type: 'line', data: { labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'], datasets: [{ label: 'Cliques', data: [50000, 65000, 75716, 90000, 102169, 120000, 180000, 190105, 224000], borderColor: brandColors.primary, backgroundColor: brandColors.primary_light, tension: 0.2, fill: true }] }, options: { responsive: true, maintainAspectRatio: false } });
+    new Chart(document.getElementById('positionChart'), { type: 'line', data: { labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'], datasets: [{ label: 'Posição Média', data: [10.8, 10.2, 9.83, 9.5, 9.1, 8.72, 8.9, 9.0, 9.18], borderColor: brandColors.accent, backgroundColor: brandColors.accent_light, tension: 0.2, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { reverse: true } } } });
+
+    // --- GRÁFICOS DE AFILIADOS ---
+    const affiliateOptions = { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
+    new Chart(document.getElementById('affiliateQ1'), { type: 'bar', data: { labels: ['Galerabet', 'E. Sorte', 'Alfa.bet', 'Superbet', 'Bet365'], datasets: [{ data: [34, 22, 16, 16, 13], backgroundColor: brandColors.secondary_light }] }, options: affiliateOptions });
+    new Chart(document.getElementById('affiliateQ2'), { type: 'bar', data: { labels: ['Bet365', 'Galerabet', 'Superbet', 'E. Sorte', 'Blaze'], datasets: [{ data: [69, 45, 43, 42, 21], backgroundColor: brandColors.secondary_light }] }, options: affiliateOptions });
+    new Chart(document.getElementById('affiliateQ3'), { type: 'bar', data: { labels: ['Bet365', 'Superbet', 'Galerabet', 'E. Sorte', 'Alfa.bet'], datasets: [{ data: [94, 83, 69, 68, 44], backgroundColor: brandColors.secondary_light }] }, options: affiliateOptions });
+
+    // --- GRÁFICO DE CONVERSÕES --- (DADOS CORRIGIDOS)
+    new Chart(document.getElementById('conversionsChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
+            datasets: [
+                { label: 'FTDs', data: [9, 5, 26, 18, 20, 62, 76, 82, 116], backgroundColor: brandColors.primary },
+                { label: 'Registos', data: [21, 13, 81, 96, 104, 117, 152, 159, 220], backgroundColor: brandColors.accent },
+                { label: 'Affiliate Clicks', data: [1455, 1280, 3110, 4212, 5311, 6200, 6761, 6306, 7306], backgroundColor: brandColors.secondary, yAxisID: 'y1' }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'top' } },
+            scales: {
+                x: { stacked: false },
+                y: { type: 'linear', display: true, position: 'left', stacked: false, title: { display: true, text: 'FTDs e Registos' } },
+                y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Cliques de Afiliados' }, grid: { drawOnChartArea: false } }
             }
-        });
-
-        // --- Gráficos Orgânicos (Linha) ---
-        new Chart(document.getElementById('organicClicksChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
-                datasets: [{ label: 'Cliques', data: [50000, 65000, 75716, 90000, 102169, 120000, 180000, 190105, 224000], borderColor: brandColors.accent, backgroundColor: brandColors.accent, tension: 0.1 }]
-            },
-            options: { responsive: true, plugins: { legend: { display: false } } }
-        });
-        new Chart(document.getElementById('organicPositionChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
-                datasets: [{ label: 'Posição', data: [10.8, 10.2, 9.83, 9.5, 9.1, 8.72, 8.9, 9.0, 9.18], borderColor: brandColors.header, backgroundColor: brandColors.header, tension: 0.1 }]
-            },
-            options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { reverse: true, beginAtZero: false } } }
-        });
-
-        // --- Gráficos de Tráfego (Anel) ---
-        const trafficOptions = { responsive: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } };
-        new Chart(document.getElementById('trafficQ1Chart').getContext('2d'), { type: 'doughnut', data: { labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'], datasets: [{ data: [52.1, 25.4, 19.9, 2.5], backgroundColor: [brandColors.header, brandColors.accent, brandColors.highlight, '#CCCCCC'] }] }, options: trafficOptions });
-        new Chart(document.getElementById('trafficQ2Chart').getContext('2d'), { type: 'doughnut', data: { labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'], datasets: [{ data: [52, 28.9, 16.6, 2.4], backgroundColor: [brandColors.header, brandColors.accent, brandColors.highlight, '#CCCCCC'] }] }, options: trafficOptions });
-        new Chart(document.getElementById('trafficQ3Chart').getContext('2d'), { type: 'doughnut', data: { labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'], datasets: [{ data: [64.9, 19.6, 13.8, 1.5], backgroundColor: [brandColors.header, brandColors.accent, brandColors.highlight, '#CCCCCC'] }] }, options: trafficOptions });
-
-        // --- Gráficos de Cliques de Afiliados (Barra Horizontal) ---
-        const affiliateOptions = { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } } };
-        new Chart(document.getElementById('affiliateQ1Chart').getContext('2d'), { type: 'bar', data: { labels: ['Galerabet', 'E. da Sorte', 'Alfa.bet', 'Superbet', 'Bet365'], datasets: [{ data: [34, 22, 16, 16, 13], backgroundColor: brandColors.accent }] }, options: affiliateOptions });
-        new Chart(document.getElementById('affiliateQ2Chart').getContext('2d'), { type: 'bar', data: { labels: ['Bet365', 'Galerabet', 'Superbet', 'E. da Sorte', 'Blaze'], datasets: [{ data: [69, 45, 43, 42, 21], backgroundColor: brandColors.accent }] }, options: affiliateOptions });
-        new Chart(document.getElementById('affiliateQ3Chart').getContext('2d'), { type: 'bar', data: { labels: ['Bet365', 'Superbet', 'Galerabet', 'E. da Sorte', 'Alfa.bet'], datasets: [{ data: [94, 83, 69, 68, 44], backgroundColor: brandColors.accent }] }, options: affiliateOptions });
+        }
     });
-    </script>
+
+    // --- GRÁFICOS ESFORÇO VS RECOMPENSA ---
+    new Chart(document.getElementById('effortChart'), { type: 'bar', data: { labels: ['Reviews', 'Apostas', 'Palpites', 'Notícias'], datasets: [{ label: 'Nº Publicações', data: [8, 39, 241, 4824], backgroundColor: brandColors.primary_light, order: 2 }, { label: 'Affiliate Clicks', data: [90, 147, 33, 268], borderColor: brandColors.secondary, backgroundColor: brandColors.secondary, type: 'line', yAxisID: 'y1', order: 1 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Nº de Publicações' } }, y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Cliques de Afiliados' }, grid: { drawOnChartArea: false } } } } });
+    new Chart(document.getElementById('crChart'), { type: 'bar', data: { labels: ['Reviews', 'Apostas', 'Palpites', 'Notícias'], datasets: [{ label: 'CR (%)', data: [18.40, 2.24, 0.46, 0.03], backgroundColor: [brandColors.secondary, brandColors.secondary_light, brandColors.primary_light, brandColors.accent_light] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
+    
+    // --- LÓGICA PARA DROPDOWNS ACESSÍVEIS ---
+    document.querySelectorAll('.dropdown .dropbtn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const dropdownContent = this.nextElementSibling;
+            const isVisible = dropdownContent.style.display === 'block';
+            document.querySelectorAll('.dropdown-content').forEach(d => d.style.display = 'none');
+            document.querySelectorAll('.dropbtn').forEach(btn => btn.classList.remove('active'));
+            if (!isVisible) {
+                dropdownContent.style.display = 'block';
+                this.classList.add('active');
+            }
+            event.stopPropagation();
+        });
+    });
+    window.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown-content').forEach(d => d.style.display = 'none');
+        document.querySelectorAll('.dropbtn').forEach(btn => btn.classList.remove('active'));
+    });
+});
+</script>
 </body>
 </html>
