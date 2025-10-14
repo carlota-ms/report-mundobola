@@ -69,3 +69,264 @@
         .data-table th, .data-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #dee2e6; white-space: nowrap; }
         .data-table th { background-color: var(--color-header); color: #FFFFFF; font-family: var(--font-heading); text-transform: uppercase; font-size: 0.9rem;}
         .data-table tr:nth-of-type(even) { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <img src="logo-clever.svg" alt="Clever Advertising Logo" class="logo">
+    </header>
+
+    <main class="main-content">
+    
+        <div class="client-logo-container">
+            <img src="logo-mundobola.svg" alt="Mundo Bola Logo" class="client-logo">
+        </div>
+        
+        <h1>Dashboard de Performance <span class="highlight">Q3 2025</span></h1>
+        <p class="text-center">Análise visual do terceiro trimestre (Julho-Setembro).</p>
+
+        <section class="report-section">
+            <h2>KPIs Principais do Trimestre</h2>
+            <div class="grid-container grid-3-cols">
+                <div class="kpi-card">
+                    <div class="kpi-label">Sessões Totais (Q3)</div>
+                    <div class="kpi-value">1.46M</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">FTDs Gerados (Q3)</div>
+                    <div class="kpi-value">274</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Meta de FTDs (Q3)</div>
+                    <div class="kpi-value positive">174%</div>
+                    <div class="kpi-label">Acima do Objetivo</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="report-section">
+            <h2>Funil de Conversão (Q3)</h2>
+            <div class="chart-container">
+                <canvas id="conversionsChart"></canvas>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Análise de Tráfego por Canal</h2>
+            <div class="grid-container grid-3-cols">
+                <div>
+                    <h3>Q1 2025</h3>
+                    <div class="chart-container">
+                        <canvas id="trafficQ1Chart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Q2 2025</h3>
+                    <div class="chart-container">
+                        <canvas id="trafficQ2Chart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Q3 2025</h3>
+                    <div class="chart-container">
+                        <canvas id="trafficQ3Chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="report-section">
+            <h2>Cliques de Afiliados por Marca</h2>
+             <div class="grid-container grid-3-cols">
+                <div>
+                    <h3>Q1: 145 cliques</h3>
+                    <div class="chart-container">
+                        <canvas id="affiliateQ1Chart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Q2: 313 cliques</h3>
+                    <div class="chart-container">
+                        <canvas id="affiliateQ2Chart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Q3: 531 cliques</h3>
+                    <div class="chart-container">
+                        <canvas id="affiliateQ3Chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Top Páginas de Conversão (Q3)</h2>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>URL da Página</th>
+                            <th>Tipo de Conteúdo</th>
+                            <th>Cliques de Afiliado (Q3)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>/apostas-brasil/mines-aposta/</td><td>Guia de Jogo</td><td>51</td></tr>
+                        <tr><td>/apostas-brasil/casas-de-apostas/</td><td>Página de Categoria</td><td>15</td></tr>
+                        <tr><td>/apostas-brasil/analise-alfa-bet/</td><td>Review</td><td>14</td></tr>
+                        <tr><td>/apostas-brasil/sites-apostas-transmissao-ao-vivo/</td><td>Post</td><td>13</td></tr>
+                        <tr><td>/apostas-brasil/blaze-apostas-review/</td><td>Review</td><td>12</td></tr>
+                        <tr><td>/apostas-brasil/analise-bet365/</td><td>Review</td><td>11</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Cores do Branding
+        const colorHeader = '#231372';
+        const colorHighlight = '#20E2C8';
+        const colorAccent = '#6106AF';
+        const colorText = '#24282A';
+
+        // --- Gráfico de Funil de Conversão (Q3) ---
+        new Chart(document.getElementById('conversionsChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Julho', 'Agosto', 'Setembro'],
+                datasets: [
+                    {
+                        label: 'FTDs',
+                        data: [76, 82, 116],
+                        backgroundColor: colorHeader,
+                    },
+                    {
+                        label: 'Registos',
+                        data: [152, 159, 220],
+                        backgroundColor: colorAccent,
+                    },
+                    {
+                        label: 'Affiliate Clicks',
+                        data: [6761, 6306, 7306],
+                        backgroundColor: colorHighlight,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: false },
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        
+        // --- Gráficos de Tráfego por Canal ---
+        const trafficOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        font: { size: 10 }
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('trafficQ1Chart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'],
+                datasets: [{
+                    data: [52.1, 25.4, 19.9, 2.5],
+                    backgroundColor: [colorHeader, colorAccent, colorHighlight, '#CCCCCC']
+                }]
+            },
+            options: trafficOptions
+        });
+
+        new Chart(document.getElementById('trafficQ2Chart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'],
+                datasets: [{
+                    data: [52, 28.9, 16.6, 2.4],
+                    backgroundColor: [colorHeader, colorAccent, colorHighlight, '#CCCCCC']
+                }]
+            },
+            options: trafficOptions
+        });
+        
+        new Chart(document.getElementById('trafficQ3Chart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Organic Search', 'Direct', 'Organic Social', 'Referral'],
+                datasets: [{
+                    data: [64.9, 19.6, 13.8, 1.5],
+                    backgroundColor: [colorHeader, colorAccent, colorHighlight, '#CCCCCC']
+                }]
+            },
+            options: trafficOptions
+        });
+        
+        // --- Gráficos de Cliques de Afiliados ---
+        const affiliateOptions = {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        };
+
+        new Chart(document.getElementById('affiliateQ1Chart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Galerabet', 'E. da Sorte', 'Alfa.bet', 'Superbet', 'Bet365'],
+                datasets: [{
+                    label: 'Cliques',
+                    data: [34, 22, 16, 16, 13],
+                    backgroundColor: colorAccent,
+                }]
+            },
+            options: affiliateOptions
+        });
+
+        new Chart(document.getElementById('affiliateQ2Chart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Bet365', 'Galerabet', 'Superbet', 'E. da Sorte', 'Blaze'],
+                datasets: [{
+                    label: 'Cliques',
+                    data: [69, 45, 43, 42, 21],
+                    backgroundColor: colorAccent,
+                }]
+            },
+            options: affiliateOptions
+        });
+        
+        new Chart(document.getElementById('affiliateQ3Chart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Bet365', 'Superbet', 'Galerabet', 'E. da Sorte', 'Alfa.bet'],
+                datasets: [{
+                    label: 'Cliques',
+                    data: [94, 83, 69, 68, 44],
+                    backgroundColor: colorAccent,
+                }]
+            },
+            options: affiliateOptions
+        });
+
+    });
+    </script>
+</body>
+</html>
