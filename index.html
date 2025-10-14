@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Performance - Mundo Bola Q3 2025</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ------------------------- */
-        /* --- BRANDING & SETUP --- */
-        /* ------------------------- */
         :root {
             --color-text: #24282A;
             --color-header: #231372;
@@ -23,32 +21,17 @@
             --font-body: 'Figtree', sans-serif;
             --font-heading: 'Barlow', sans-serif;
         }
-
-        /* Reset Básico e Configuração Mobile-First */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
         body {
             font-family: var(--font-body);
             color: var(--color-text);
             background-color: #f4f7f9;
         }
-        
-        /* ------------------------- */
-        /* --- LAYOUT & ESTRUTURA --- */
-        /* ------------------------- */
         .main-header {
             background-color: #FFFFFF;
             height: 70px;
-            padding: 1.5em;
+            padding: 1em 1.5em;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -57,199 +40,62 @@
             top: 0;
             z-index: 1000;
         }
-
-        .main-header .logo {
-            height: 40px; 
-            width: auto;
-        }
-
-        .main-content {
-            padding: 2rem 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .client-logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .client-logo-container .client-logo {
-            max-width: 200px;
-            height: auto;
-        }
-
-        .report-section {
-            background-color: #FFFFFF;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-        }
-        
-        .grid-container {
-            display: grid;
-            gap: 1.5rem;
-        }
-
+        .main-header .logo { height: 40px; width: auto; }
+        .main-content { padding: 2rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .client-logo-container { display: flex; justify-content: center; align-items: center; margin-bottom: 1rem; }
+        .client-logo-container .client-logo { max-width: 200px; height: auto; }
+        .report-section { background-color: #FFFFFF; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        .grid-container { display: grid; gap: 1.5rem; }
         .grid-2-cols { grid-template-columns: 1fr; }
         .grid-3-cols { grid-template-columns: 1fr; }
-
         @media (min-width: 768px) {
             .grid-2-cols { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 992px) {
             .grid-3-cols { grid-template-columns: repeat(3, 1fr); }
         }
-
-        /* ------------------------- */
-        /* --- COMPONENTES --- */
-        /* ------------------------- */
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--color-header);
-            margin-bottom: 1rem;
-        }
-        
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--color-header); margin-bottom: 1rem; }
         h1 { font-size: 2.2rem; line-height: 1.2; text-align: center; }
-        h2 { font-size: 1.8rem; margin-top: 2rem; border-bottom: 2px solid var(--color-highlight); padding-bottom: 0.5rem; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid var(--color-highlight); padding-bottom: 0.5rem; }
         h3 { font-size: 1.3rem; color: var(--color-accent); text-transform: none; }
-        
         p { font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; }
-        ul { list-style-position: inside; padding-left: 1rem; }
+        ul { list-style-position: inside; padding-left: 0; }
         li { margin-bottom: 0.5rem; }
-
         .highlight { color: var(--color-highlight); }
         .text-center { text-align: center; }
-
-        .kpi-card {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .kpi-value {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            color: var(--color-header);
-        }
-        .kpi-label {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        .kpi-growth {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
+        .kpi-card { background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center; }
+        .kpi-value { font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-header); }
+        .kpi-label { font-size: 1rem; margin-bottom: 0.5rem; }
+        .kpi-growth { font-size: 1.2rem; font-weight: 700; }
         .positive { color: var(--color-positive); }
         .negative { color: var(--color-negative); }
-
-        .chart-placeholder {
-            width: 100%;
-            height: 300px;
-            background-color: #e9ecef;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 8px;
-            font-weight: 700;
-            color: #adb5bd;
-        }
-        
-        /* Tabela */
-        .table-wrapper {
-            overflow-x: auto;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        .data-table th, .data-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .data-table th {
-            background-color: var(--color-header);
-            color: #FFFFFF;
-            font-family: var(--font-heading);
-            text-transform: uppercase;
-        }
-        .data-table tr:nth-of-type(even) {
-            background-color: #f8f9fa;
-        }
-        .data-table td:nth-child(3), .data-table td:nth-child(5), .data-table td:nth-child(7) {
-            font-weight: 700;
-        }
-
-        /* Gráfico de Barras Horizontais */
-        .bar-chart-container {
-            list-style: none;
-            padding: 0;
-        }
-        .bar-chart-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-        .bar-label {
-            width: 120px;
-            flex-shrink: 0;
-            font-size: 0.9rem;
-        }
-        .bar-wrapper {
-            flex-grow: 1;
-            background-color: #e9ecef;
-            border-radius: 4px;
-        }
-        .bar {
-            height: 20px;
-            background-color: var(--color-accent);
-            border-radius: 4px;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 8px;
-        }
-        
-        .strategy-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .strategy-list li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 1rem;
-        }
-        .strategy-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--color-highlight);
-            font-weight: bold;
-        }
-
+        .chart-placeholder { width: 100%; min-height: 300px; background-color: #e9ecef; display: flex; justify-content: center; align-items: center; border-radius: 8px; font-weight: 700; color: #adb5bd; text-align: center; padding: 1rem; }
+        .table-wrapper { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .data-table th, .data-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #dee2e6; white-space: nowrap; }
+        .data-table th { background-color: var(--color-header); color: #FFFFFF; font-family: var(--font-heading); text-transform: uppercase; font-size: 0.9rem;}
+        .data-table tr:nth-of-type(even) { background-color: #f8f9fa; }
+        .data-table td:nth-child(3), .data-table td:nth-child(5) { font-weight: 700; }
+        .bar-chart-container { list-style: none; padding: 0; margin-top: 1.5rem;}
+        .bar-chart-item { display: flex; align-items: center; margin-bottom: 0.75rem; }
+        .bar-label { width: 120px; flex-shrink: 0; font-size: 0.9rem; padding-right: 10px; }
+        .bar-wrapper { flex-grow: 1; background-color: #e9ecef; border-radius: 4px; }
+        .bar { height: 24px; background-color: var(--color-accent); border-radius: 4px; color: white; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+        .strategy-list { list-style-type: none; padding: 0; }
+        .strategy-list li { position: relative; padding-left: 25px; margin-bottom: 1rem; }
+        .strategy-list li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--color-highlight); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <svg class="logo" viewBox="0 0 837.7 245.66" xmlns="http://www.w.org/2000/svg" ...>
-            </svg>
+        <img src="logo-clever.svg" alt="Clever Advertising Logo" class="logo">
     </header>
 
     <main class="main-content">
     
         <div class="client-logo-container">
-            <svg class="client-logo" viewBox="0 0 454.1 151.17" xmlns="http://www.w3.org/2000/svg">
-                 </svg>
+            <img src="logo-mundobola.svg" alt="Mundo Bola Logo" class="client-logo">
         </div>
         
         <h1>Análise de Performance <span class="highlight">Q1-Q3 2025</span></h1>
@@ -274,23 +120,23 @@
         <section class="report-section">
             <h2>Análise de Tráfego por Canal</h2>
             <div class="grid-container grid-3-cols">
-                <div class="quarter-card">
+                <div>
                     <h3>Q1 2025</h3>
-                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q1]</div>
-                    </div>
-                <div class="quarter-card">
+                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q1] <br> Organic Search: 52.1%, Direct: 25.4%, Organic Social: 19.9%, Referral: 2.5%</div>
+                </div>
+                <div>
                     <h3>Q2 2025</h3>
-                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q2]</div>
-                    </div>
-                <div class="quarter-card">
+                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q2] <br> Organic Search: 52%, Direct: 28.9%, Organic Social: 16.6%, Referral: 2.4%</div>
+                </div>
+                <div>
                     <h3>Q3 2025</h3>
-                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q3]</div>
-                     </div>
+                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q3] <br> Organic Search: 64.9%, Direct: 19.6%, Organic Social: 13.8%, Referral: 1.5%</div>
+                </div>
             </div>
         </section>
 
         <section class="report-section">
-            <h2>Performance Orgânica (Google Search Console)</h2>
+            <h2>Performance Orgânica (GSC)</h2>
             <div class="table-wrapper">
                 <table class="data-table">
                     <thead>
@@ -305,33 +151,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Q1 2025</td>
-                            <td>190,716</td>
-                            <td>-</td>
-                            <td>14,105,336</td>
-                            <td>-</td>
-                            <td>9.83</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Q2 2025</td>
-                            <td>312,169</td>
-                            <td class="positive">64%</td>
-                            <td>28,572,951</td>
-                            <td class="positive">103%</td>
-                            <td>8.72</td>
-                            <td class="positive">-1.11</td>
-                        </tr>
-                        <tr>
-                            <td>Q3 2025</td>
-                            <td>594,105</td>
-                            <td class="positive">90%</td>
-                            <td>56,328,565</td>
-                            <td class="positive">97%</td>
-                            <td>9.18</td>
-                            <td class="negative">+0.46</td>
-                        </tr>
+                        <tr><td>Q1 2025</td><td>190,716</td><td>-</td><td>14,105,336</td><td>-</td><td>9.83</td><td>-</td></tr>
+                        <tr><td>Q2 2025</td><td>312,169</td><td class="positive">64%</td><td>28,572,951</td><td class="positive">103%</td><td>8.72</td><td class="positive">-1.11</td></tr>
+                        <tr><td>Q3 2025</td><td>594,105</td><td class="positive">90%</td><td>56,328,565</td><td class="positive">97%</td><td>9.18</td><td class="negative">+0.46</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -344,7 +166,7 @@
         <section class="report-section">
             <h2>Cliques de Afiliados por Marca</h2>
             <div class="grid-container grid-3-cols">
-                <div class="quarter-card">
+                <div>
                     <h3>Q1: 145 cliques</h3>
                     <ul class="bar-chart-container">
                         <li class="bar-chart-item"><span class="bar-label">Galerabet</span><div class="bar-wrapper"><div class="bar" style="width: 100%;">34</div></div></li>
@@ -354,7 +176,7 @@
                         <li class="bar-chart-item"><span class="bar-label">Bet365</span><div class="bar-wrapper"><div class="bar" style="width: 38.2%;">13</div></div></li>
                     </ul>
                 </div>
-                <div class="quarter-card">
+                <div>
                     <h3>Q2: 313 cliques <span class="positive">(+115%)</span></h3>
                     <ul class="bar-chart-container">
                         <li class="bar-chart-item"><span class="bar-label">Bet365</span><div class="bar-wrapper"><div class="bar" style="width: 100%;">69</div></div></li>
@@ -364,7 +186,7 @@
                         <li class="bar-chart-item"><span class="bar-label">Alfa.bet</span><div class="bar-wrapper"><div class="bar" style="width: 37.7%;">26</div></div></li>
                     </ul>
                 </div>
-                <div class="quarter-card">
+                <div>
                     <h3>Q3: 531 cliques <span class="positive">(+70%)</span></h3>
                     <ul class="bar-chart-container">
                         <li class="bar-chart-item"><span class="bar-label">Bet365</span><div class="bar-wrapper"><div class="bar" style="width: 100%;">94</div></div></li>
@@ -386,11 +208,11 @@
         <section class="report-section">
             <h2>Esforço vs. Recompensa (1º Semestre)</h2>
             <div class="grid-container grid-2-cols">
-                <div class="effort-reward-card">
+                <div>
                     <h3>Publicações vs. Cliques</h3>
                     <div class="chart-placeholder">[GRÁFICO COMBINADO: BARRAS E LINHA]</div>
                 </div>
-                <div class="effort-reward-card">
+                <div>
                     <h3>Taxa de Conversão por Categoria</h3>
                     <div class="chart-placeholder">[GRÁFICO DE BARRAS: CR%]</div>
                 </div>
