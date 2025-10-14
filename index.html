@@ -17,28 +17,134 @@
             --background-color: #f8f9fa;
             --card-background: #ffffff;
         }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Figtree', sans-serif; margin: 0; background-color: var(--background-color); color: var(--text-color); line-height: 1.6; }
-        .main-header { background-color: var(--card-background); padding: 1.5em; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1001; display: flex; justify-content: center; align-items: center; gap: 20px; }
-        .main-header .logo-mundobola { height: 60px; width: auto; }
-        .main-header .logo-clever { height: 70px; width: auto; }
-        h1, h2, h3, h4 { font-family: 'Barlow', sans-serif; font-weight: 700; text-transform: uppercase; color: var(--header-color); position: relative; }
+
+        /* */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .main-header {
+            background-color: var(--card-background);
+            padding: 1.5em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .main-header .logo-mundobola {
+            height: 60px;
+            width: auto;
+        }
+        .main-header .logo-clever {
+            height: 70px;
+            width: auto;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Barlow', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--header-color);
+            position: relative;
+        }
+        
         h1 { font-size: 2.5rem; }
         h2 { padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
-        h2::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--highlight-color); margin-top: 0.5rem; }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            margin-top: 0.5rem;
+        }
+        
         .container { max-width: 1200px; margin: auto; padding: 2rem; }
-        .section { background-color: var(--card-background); margin-bottom: 2rem; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: flex-start; }
-        .navbar { background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 0.5rem 1rem; position: sticky; top: 111px; z-index: 1000; border-bottom: 1px solid #eee; }
-        .navbar-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .navbar a, .dropdown .dropbtn { color: var(--header-color); text-decoration: none; padding: 10px 15px; border-radius: 8px; transition: background-color 0.3s, color 0.3s; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 15px; border: none; background: none; cursor: pointer; }
-        .navbar a:hover, .dropdown:hover .dropbtn { background-color: var(--highlight-color); color: var(--header-color); }
-        .navbar a.active, .dropdown .dropbtn.active { background-color: var(--highlight-color); color: var(--header-color); }
+        .section {
+            background-color: var(--card-background);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            position: sticky;
+            top: 111px;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+        .navbar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .navbar a, .dropdown .dropbtn {
+            color: var(--header-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Figtree', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: var(--highlight-color);
+            color: var(--header-color);
+        }
+
+        /* */
+        .navbar a.active, .dropdown .dropbtn.active {
+            background-color: var(--highlight-color);
+            color: var(--header-color);
+        }
+
         .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; background-color: var(--card-background); min-width: 220px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); z-index: 1; border-radius: 8px; overflow: hidden; top: 100%; left: 50%; transform: translateX(-50%); padding: 5px 0; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-background);
+            min-width: 220px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 0;
+        }
         .dropdown-content a { color: var(--text-color); padding: 10px 16px; text-decoration: none; display: block; text-align: left; font-weight: normal; }
         .dropdown-content a:hover { background-color: #f1f1f1; }
         .dropdown:hover .dropdown-content { display: block; }
+        
         .report-title { text-align: center; margin: 2rem 0 3rem 0; }
         .report-title p { font-size: 1.2rem; max-width: 600px; margin: auto; color: var(--text-color); }
         .chart-container { position: relative; height: 400px; width: 100%; }
@@ -56,8 +162,6 @@
         .strategy-card h4 { color: var(--accent-color); margin-top: 0; }
         ul { list-style-type: '✔ '; padding-left: 1.5rem; }
         li { padding-bottom: 0.5rem; }
-        .view-more-link { display: block; text-align: right; margin-top: 1rem; font-weight: bold; color: var(--header-color); text-decoration: none; }
-        .view-more-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -98,48 +202,163 @@
 </nav>
 
 <main class="container">
-    
+
     <div class="report-title">
         <h1>Relatório de Performance 2025</h1>
         <p>Uma análise detalhada dos resultados do <strong>Mundo Bola</strong> de Janeiro a Setembro.</p>
     </div>
 
-    <section id="geral" class="section"><h2>Visão Geral do Período (Q1-Q3 2025)</h2><div class="kpi-container"><div class="kpi"><div>Total de Sessões</div><div class="value">1.1M</div><div class="change increase">+37.15%</div></div><div class="kpi"><div>Total de Pageviews</div><div class="value">1.64M</div><div class="change increase">+40.46%</div></div></div></section>
-    <section id="traffic-sources" class="section"><h2>Fontes de Tráfego por Trimestre</h2><p>A Pesquisa Orgânica (Organic Search) demonstrou um crescimento notável, consolidando-se como a principal fonte de tráfego e atingindo <strong>64.9%</strong> do total no Q3.</p><div class="grid"><div><h4>Q1</h4><div class="chart-container"><canvas id="trafficQ1"></canvas></div></div><div><h4>Q2</h4><div class="chart-container"><canvas id="trafficQ2"></canvas></div></div><div><h4>Q3</h4><div class="chart-container"><canvas id="trafficQ3"></canvas></div></div></div></section>
-    <section id="user-types" class="section"><h2>Visitantes Novos vs. Recorrentes</h2><p>Observa-se um aumento progressivo na percentagem de visitantes recorrentes, de <strong>39.1%</strong> no Q1 para <strong>44.8%</strong> no Q3, indicando uma maior fidelização da audiência.</p><div class="grid"><div><h4>Q1</h4><div class="chart-container"><canvas id="usersQ1"></canvas></div></div><div><h4>Q2</h4><div class="chart-container"><canvas id="usersQ2"></canvas></div></div><div><h4>Q3</h4><div class="chart-container"><canvas id="usersQ3"></canvas></div></div></div></section>
-    <section id="organic-clicks" class="section"><h2>Evolução da Performance Orgânica (SEO)</h2><p>O número de cliques orgânicos cresceu consistentemente ao longo do ano. A posição média nos resultados de pesquisa também melhorou, atingindo o seu melhor ponto em Setembro (7.7).</p><div class="grid"><div><h4>Cliques Orgânicos por Mês</h4><div class="chart-container"><canvas id="organicClicksChart"></canvas></div></div><div><h4>Posição Média por Mês</h4><div class="chart-container"><canvas id="positionChart"></canvas></div></div></div></section>
-    <section id="organic-table" class="section"><h2>Tabela de Desempenho Orgânico Trimestral</h2><table><thead><tr><th>Trimestre</th><th>Cliques</th><th>Variação (%)</th><th>Impressões</th><th>Variação (%)</th><th>Posição Média</th><th>Variação</th></tr></thead><tbody><tr><td>Q1 2025</td><td>190,716</td><td>-</td><td>14,105,336</td><td>-</td><td>9.83</td><td>-</td></tr><tr><td>Q2 2025</td><td>312,169</td><td class="increase">+64%</td><td>28,572,951</td><td class="increase">+103%</td><td>8.72</td><td class="increase">-1.11</td></tr><tr><td>Q3 2025</td><td>594,105</td><td class="increase">+90%</td><td>56,328,565</td><td class="increase">+97%</td><td>9.18</td><td class="decrease">+0.46</td></tr></tbody></table></section>
-    <section id="affiliate-clicks" class="section"><h2>Cliques de Afiliados por Marca</h2><p>O volume de cliques de afiliados cresceu exponencialmente. A Bet365 assumiu a liderança nos últimos dois trimestres.</p><div class="grid"><div><h4>Q1 (145 cliques)</h4><div class="chart-container"><canvas id="affiliateQ1"></canvas></div></div><div><h4>Q2 (313 cliques)</h4><div class="chart-container"><canvas id="affiliateQ2"></canvas></div></div><div><h4>Q3 (531 cliques)</h4><div class="chart-container"><canvas id="affiliateQ3"></canvas></div></div></div></section>
-    <section id="conversions" class="section"><h2>Conversões Mensais (FTDs, Registos, Cliques de Afiliados)</h2><p>Setembro foi o mês com o maior número de cliques de afiliados (220). Março destacou-se pelo elevado número de registos (96).</p><div class="chart-container" style="height: 500px;"><canvas id="conversionsChart"></canvas></div></section>
-    <section id="effort-reward" class="section"><h2>Análise de Esforço vs. Recompensa por Categoria</h2><p>A categoria <strong>"Reviews"</strong> apresenta a maior taxa de conversão (18.40%) com um volume baixo de publicações, indicando um alto retorno sobre o investimento.</p><div class="grid"><div><h4>Publicações vs. Cliques de Afiliados</h4><div class="chart-container"><canvas id="effortChart"></canvas></div></div><div><h4>Taxa de Conversão (CR%)</h4><div class="chart-container"><canvas id="crChart"></canvas></div></div></div></section>
+    <section id="geral" class="section">
+        <h2>Visão Geral do Período (Q1-Q3 2025)</h2>
+        <div class="kpi-container">
+            <div class="kpi">
+                <div>Total de Sessões</div>
+                <div class="value">1.1M</div>
+                <div class="change increase">+37.15%</div>
+            </div>
+            <div class="kpi">
+                <div>Total de Pageviews</div>
+                <div class="value">1.64M</div>
+                <div class="change increase">+40.46%</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="traffic-sources" class="section">
+        <h2>Fontes de Tráfego por Trimestre</h2>
+        <p>A Pesquisa Orgânica (Organic Search) demonstrou um crescimento notável, consolidando-se como a principal fonte de tráfego e atingindo <strong>64.9%</strong> do total no Q3.</p>
+        <div class="grid">
+            <div><h4>Q1</h4><div class="chart-container"><canvas id="trafficQ1"></canvas></div></div>
+            <div><h4>Q2</h4><div class="chart-container"><canvas id="trafficQ2"></canvas></div></div>
+            <div><h4>Q3</h4><div class="chart-container"><canvas id="trafficQ3"></canvas></div></div>
+        </div>
+    </section>
+
+    <section id="user-types" class="section">
+        <h2>Visitantes Novos vs. Recorrentes</h2>
+        <p>Observa-se um aumento progressivo na percentagem de visitantes recorrentes, de <strong>39.1%</strong> no Q1 para <strong>44.8%</strong> no Q3, indicando uma maior fidelização da audiência.</p>
+        <div class="grid">
+            <div><h4>Q1</h4><div class="chart-container"><canvas id="usersQ1"></canvas></div></div>
+            <div><h4>Q2</h4><div class="chart-container"><canvas id="usersQ2"></canvas></div></div>
+            <div><h4>Q3</h4><div class="chart-container"><canvas id="usersQ3"></canvas></div></div>
+        </div>
+    </section>
+
+    <section id="organic-clicks" class="section">
+        <h2>Evolução da Performance Orgânica (SEO)</h2>
+        <p>O número de cliques orgânicos cresceu consistentemente ao longo do ano, com picos em Julho e Setembro. A posição média nos resultados de pesquisa também melhorou, atingindo o seu melhor ponto em Setembro (7.7).</p>
+        <div class="grid">
+            <div><h4>Cliques Orgânicos por Mês</h4><div class="chart-container"><canvas id="organicClicksChart"></canvas></div></div>
+            <div><h4>Posição Média por Mês</h4><div class="chart-container"><canvas id="positionChart"></canvas></div></div>
+        </div>
+    </section>
+
+    <section id="organic-table" class="section">
+        <h2>Tabela de Desempenho Orgânico Trimestral</h2>
+        <table>
+            <thead><tr><th>Trimestre</th><th>Cliques</th><th>Variação (%)</th><th>Impressões</th><th>Variação (%)</th><th>Posição Média</th><th>Variação</th></tr></thead>
+            <tbody>
+                <tr><td>Q1 2025</td><td>190,716</td><td>-</td><td>14,105,336</td><td>-</td><td>9.83</td><td>-</td></tr>
+                <tr><td>Q2 2025</td><td>312,169</td><td class="increase">+64%</td><td>28,572,951</td><td class="increase">+103%</td><td>8.72</td><td class="increase">-1.11</td></tr>
+                <tr><td>Q3 2025</td><td>594,105</td><td class="increase">+90%</td><td>56,328,565</td><td class="increase">+97%</td><td>9.18</td><td class="decrease">+0.46</td></tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section id="affiliate-clicks" class="section">
+        <h2>Cliques de Afiliados por Marca</h2>
+         <p>O volume de cliques de afiliados cresceu exponencialmente, com um aumento de <strong>+115%</strong> no Q2 e <strong>+70%</strong> no Q3. A Bet365 assumiu a liderança nos últimos dois trimestres.</p>
+        <div class="grid">
+            <div><h4>Q1 (145 cliques)</h4><div class="chart-container"><canvas id="affiliateQ1"></canvas></div></div>
+            <div><h4>Q2 (313 cliques)</h4><div class="chart-container"><canvas id="affiliateQ2"></canvas></div></div>
+            <div><h4>Q3 (531 cliques)</h4><div class="chart-container"><canvas id="affiliateQ3"></canvas></div></div>
+        </div>
+    </section>
+    
+    <section id="conversions" class="section">
+        <h2>Conversões Mensais (FTDs, Registos, Cliques de Afiliados)</h2>
+        <p>Setembro foi o mês com o maior número de cliques de afiliados (220). Março destacou-se pelo elevado número de registos (96), impulsionando o total de conversões nesse período.</p>
+        <div class="chart-container" style="height: 500px;"><canvas id="conversionsChart"></canvas></div>
+    </section>
+    
+    <section id="effort-reward" class="section">
+        <h2>Análise de Esforço vs. Recompensa por Categoria</h2>
+        <p>Apesar do baixo volume de publicações (apenas 8), a categoria <strong>"Reviews"</strong> apresenta a maior taxa de conversão (18.40%), indicando um alto retorno sobre o investimento. Em contraste, "Notícias" exige um esforço massivo (4,824 publicações) para uma conversão muito baixa (0.03%).</p>
+        <div class="grid">
+            <div><h4>Publicações vs. Cliques de Afiliados</h4><div class="chart-container"><canvas id="effortChart"></canvas></div></div>
+            <div><h4>Taxa de Conversão (CR%)</h4><div class="chart-container"><canvas id="crChart"></canvas></div></div>
+        </div>
+    </section>
     
     <section id="top-pages" class="section">
         <h2>Top Páginas por Cliques de Afiliados (Q3)</h2>
-        <p>As páginas do tipo "post" e "review" dominam as conversões. A página de "casas-de-apostas" demonstra uma duração de sessão excecionalmente alta, indicando alto engajamento.</p>
+        <p>As páginas do tipo "post" e "review" dominam as conversões, com destaque para conteúdos sobre jogos específicos como "Mines" e análises de casas de apostas. A página de "casas-de-apostas" demonstra uma duração de sessão excecionalmente alta, indicando alto engajamento.</p>
         <table>
-            <thead>
-                <tr>
-                    <th>Página (Post)</th>
-                    <th>Tipo</th>
-                    <th>Cliques de Afiliado</th>
-                    <th>Duração Média (seg)</th>
-                </tr>
-            </thead>
-            <tbody id="top-pages-body">
-                <tr><td colspan="4" style="text-align: center;">A carregar dados...</td></tr>
+            <thead><tr><th>Página (Post)</th><th>Tipo</th><th>Cliques Afiliado</th><th>Duração Média (seg)</th></tr></thead>
+            <tbody>
+                <tr><td>/apostas-brasil/mines-aposta/</td><td>post</td><td>51</td><td>31.76</td></tr>
+                <tr><td>/apostas-brasil/casas-de-apostas/</td><td>category</td><td>15</td><td>465.01</td></tr>
+                <tr><td>/apostas-brasil/analise-alfa-bet/</td><td>review</td><td>14</td><td>47.5</td></tr>
+                <tr><td>/apostas-brasil/sites-apostas-transmissao-ao-vivo/</td><td>post</td><td>13</td><td>60.69</td></tr>
+                <tr><td>/apostas-brasil/blaze-apostas-review/</td><td>review</td><td>12</td><td>17.45</td></tr>
+                <tr><td>/apostas-brasil/analise-bet365/</td><td>review</td><td>11</td><td>42.09</td></tr>
+                <tr><td>/apostas-brasil/analise-esportes-da-sorte/</td><td>review</td><td>9</td><td>31.68</td></tr>
+                <tr><td>/apostas-brasil/mines-galera-bet/</td><td>post</td><td>9</td><td>4.71</td></tr>
+                <tr><td>/apostas-brasil/como-jogar-aviator/</td><td>post</td><td>7</td><td>272.01</td></tr>
             </tbody>
         </table>
-        <a id="view-more-link" href="https://docs.google.com/spreadsheets/d/107EhCOqUDgP9ObO-bLx5p3HHvZcsz3sSxxKdjfNE9zk/edit?gid=2117189680#gid=2117189680" target="_blank" class="view-more-link" style="display: none;">
-            Ver tabela completa na Google Sheet &rarr;
-        </a>
     </section>
 
-    <section id="strategy" class="section"><h2>Estratégia para o Futuro</h2><div class="grid"><div><h4>01. Escalar Conversão</h4><ul><li>Aumentar a produção de conteúdos de apostas para 3 por semana.</li><li>Continuar otimização de conteúdos evergreen antigos.</li><li>Rever a estrutura de links internos para fortalecer a autoridade.</li><li>Focar em uma estratégia robusta de backlinks.</li></ul></div><div><h4>02. Inovação e Testes</h4><ul><li>Criar páginas de ferramentas de apostas com IA.</li><li>Testar "conteúdo evolutivo" (rankings do tipo "os melhores").</li><li>Iniciar a monetização com AdSense.</li><li>Criar mais páginas focadas em conversão.</li></ul></div><div><h4>03. Otimização Contínua</h4><ul><li>Continuar a aumentar a autoridade do site (DR atual: <strong>58</strong>).</li></ul></div></div><hr style="margin: 2rem 0; border: 1px solid #eee;"><h3 id="evergreen-proposal" style="margin-top: 2rem;">Proposta de Destaque: Transformar Palpites em Ativos Evergreen</h3><p>Uma iniciativa chave para resolver o problema de conteúdo datado ("index bloat") e fortalecer a autoridade do site a longo prazo.</p><div class="grid"><div class="strategy-card"><h4>O Processo</h4><p>Automatizar a transformação de páginas de "palpites" (pré-jogo) para páginas de "resultados" (pós-jogo), atualizando o conteúdo com o resultado final e estatísticas.</p></div><div class="strategy-card"><h4>Principais Benefícios</h4><ul><li><strong>Preserva o Valor do URL:</strong> A página continua a receber tráfego para pesquisas de resultados.</li><li><strong>Fortalece o E-E-A-T:</strong> Demonstra conhecimento e transparência.</li><li><strong>Melhora a Experiência do Utilizador:</strong> Oferece informação útil mesmo após o fim do jogo.</li><li><strong>Cria Links Internos de Valor:</strong> Transforma páginas de valor finito em conteúdo histórico.</li></ul></div></div></section>
-
+    <section id="strategy" class="section">
+        <h2>Estratégia para o Futuro</h2>
+        <div class="grid">
+            <div>
+                <h4>01. Escalar Conversão</h4>
+                <ul>
+                    <li>Aumentar a produção de conteúdos de apostas para 3 por semana.</li>
+                    <li>Continuar otimização de conteúdos evergreen antigos.</li>
+                    <li>Rever a estrutura de links internos para fortalecer a autoridade das páginas.</li>
+                    <li>Focar em uma estratégia robusta de backlinks.</li>
+                </ul>
+            </div>
+            <div>
+                <h4>02. Inovação e Testes</h4>
+                <ul>
+                    <li>Criar páginas de ferramentas de apostas com IA.</li>
+                    <li>Testar "conteúdo evolutivo" (rankings do tipo "os melhores").</li>
+                    <li>Iniciar a monetização com AdSense.</li>
+                    <li>Criar mais páginas focadas em conversão.</li>
+                </ul>
+            </div>
+            <div>
+                <h4>03. Otimização Contínua</h4>
+                <ul>
+                    <li>Continuar a aumentar a autoridade do site (DR atual: <strong>58</strong>).</li>
+                </ul>
+            </div>
+        </div>
+        <hr style="margin: 2rem 0; border: 1px solid #eee;">
+        <h3 id="evergreen-proposal" style="margin-top: 2rem;">Proposta de Destaque: Transformar Palpites em Ativos Evergreen</h3>
+        <p>Uma iniciativa chave para resolver o problema de conteúdo datado ("index bloat") e fortalecer a autoridade do site a longo prazo.</p>
+        <div class="grid">
+            <div class="strategy-card">
+                <h4>O Processo</h4>
+                <p>Automatizar a transformação de páginas de "palpites" (pré-jogo) para páginas de "resultados" (pós-jogo), atualizando o conteúdo com o resultado final, estatísticas e análise se o palpite foi correto.</p>
+            </div>
+             <div class="strategy-card">
+                <h4>Principais Benefícios</h4>
+                <ul>
+                    <li><strong>Preserva o Valor do URL:</strong> A página continua a receber tráfego para pesquisas de resultados.</li>
+                    <li><strong>Fortalece o E-E-A-T:</strong> Demonstra conhecimento, transparência e autoridade.</li>
+                    <li><strong>Melhora a Experiência do Utilizador:</strong> Oferece informação útil mesmo após o fim do jogo.</li>
+                    <li><strong>Cria Links Internos de Valor:</strong> Transforma páginas de valor finito em conteúdo histórico que pode ser referenciado.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </main>
 
 <script>
-    // Script dos Gráficos (sem alterações)
     const brandColors = { primary: '#231372', secondary: '#20E2C8', accent: '#6106AF', primary_light: 'rgba(35, 19, 114, 0.7)', secondary_light: 'rgba(32, 226, 200, 0.7)', accent_light: 'rgba(97, 6, 175, 0.7)', gray: '#dee2e6' };
     new Chart(document.getElementById('trafficQ1'), { type: 'doughnut', data: { labels: ['Pesquisa Orgânica', 'Direto', 'Social Orgânico', 'Referência'], datasets: [{ data: [52.1, 25.4, 19.9, 2.5], backgroundColor: [brandColors.primary, brandColors.secondary, brandColors.accent, brandColors.gray] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
     new Chart(document.getElementById('trafficQ2'), { type: 'doughnut', data: { labels: ['Pesquisa Orgânica', 'Direto', 'Social Orgânico', 'Referência'], datasets: [{ data: [52, 28.9, 16.6, 2.4], backgroundColor: [brandColors.primary, brandColors.secondary, brandColors.accent, brandColors.gray] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
@@ -156,81 +375,51 @@
     new Chart(document.getElementById('conversionsChart'), { type: 'bar', data: { labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro'], datasets: [{ label: 'FTDs', data: [9, 18, 1, 2, 3, 13, 12, 11, 12], backgroundColor: brandColors.primary }, { label: 'Registos', data: [0, 5, 96, 20, 11, 21, 26, 0, 0], backgroundColor: brandColors.accent }, { label: 'Cliques Afiliado', data: [0, 62, 117, 128, 81, 104, 152, 159, 220], backgroundColor: brandColors.secondary }] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: false }, y: { stacked: false, beginAtZero: true } }, plugins: { legend: { position: 'bottom' } } } });
     new Chart(document.getElementById('effortChart'), { type: 'bar', data: { labels: ['Reviews', 'Apostas', 'Palpites', 'Notícias'], datasets: [{ label: 'Nº Publicações', data: [8, 39, 241, 4824], backgroundColor: brandColors.primary, order: 2, yAxisID: 'y' }, { label: 'Cliques de Afiliados', data: [90, 147, 33, 268], borderColor: brandColors.secondary, backgroundColor: brandColors.secondary, type: 'line', yAxisID: 'y1', order: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { type: 'logarithmic', display: true, position: 'left', title: { display: true, text: 'Nº de Publicações (Escala Log)' } }, y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Cliques de Afiliados' }, grid: { drawOnChartArea: false } } } } });
     new Chart(document.getElementById('crChart'), { type: 'bar', data: { labels: ['Reviews', 'Apostas', 'Palpites', 'Notícias'], datasets: [{ label: 'CR (%)', data: [18.40, 2.24, 0.46, 0.03], backgroundColor: [brandColors.secondary, brandColors.primary, brandColors.accent, brandColors.gray] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Taxa de Conversão (%)' } } } } });
-    
-    // Script do Scrollspy (sem alterações)
+
+    /* */
     document.addEventListener('DOMContentLoaded', () => {
         const sections = document.querySelectorAll('main section[id]');
         const navLinks = document.querySelectorAll('.navbar a');
         const dropdownButtons = document.querySelectorAll('.dropdown .dropbtn');
+
         const highlightNavOnScroll = () => {
             let currentId = '';
-            const headerOffset = 120;
+            // O offset deve ser um pouco maior que a altura do header + navbar
+            const headerOffset = 120; 
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - headerOffset;
-                if (window.scrollY >= sectionTop) { currentId = section.getAttribute('id'); }
+                if (window.scrollY >= sectionTop) {
+                    currentId = section.getAttribute('id');
+                }
             });
+
+            // Primeiro, remove a classe 'active' de todos os links e botões
             navLinks.forEach(link => link.classList.remove('active'));
             dropdownButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Depois, adiciona a classe 'active' ao link correto e ao seu botão pai (se existir)
             navLinks.forEach(link => {
+                // Verifica se o href do link corresponde à secção atual
                 if (link.getAttribute('href') === '#' + currentId) {
                     link.classList.add('active');
+                    
                     const parentDropdown = link.closest('.dropdown');
-                    if (parentDropdown) { parentDropdown.querySelector('.dropbtn').classList.add('active'); }
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.dropbtn').classList.add('active');
+                    }
                 }
             });
+             // Caso especial para o link principal "Estratégia Futura"
             const strategyLink = document.querySelector('.navbar a[href="#strategy"]');
-            if (currentId === 'strategy') { strategyLink.classList.add('active'); }
-        };
-        window.addEventListener('scroll', highlightNavOnScroll);
-        highlightNavOnScroll();
-    });
-
-    // SCRIPT MODIFICADO PARA A TABELA DINÂMICA
-    document.addEventListener('DOMContentLoaded', () => {
-        // Use a URL de publicação como CSV
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4sC4AnWp_2y0wY-K8G5j5g5g5s6f6d6f6d6f6d6f6d6f6d6f6d6f6d6f6d6f6d6f6d/pub?gid=2117189680&single=true&output=csv';
-
-        const tableBody = document.getElementById('top-pages-body');
-        const viewMoreLink = document.getElementById('view-more-link');
-
-        async function fetchSheetData() {
-            try {
-                const response = await fetch(sheetUrl);
-                if (!response.ok) throw new Error('Network response was not ok.');
-                const csvText = await response.text();
-                
-                const rows = csvText.trim().split('\n').slice(1); // Pula o cabeçalho
-                
-                tableBody.innerHTML = ''; // Limpa a mensagem "A carregar"
-
-                // Pega apenas as primeiras 10 linhas para exibir
-                const rowsToDisplay = rows.slice(0, 10);
-
-                rowsToDisplay.forEach(rowText => {
-                    const columns = rowText.split(',');
-                    const tr = document.createElement('tr');
-                    
-                    // Constrói a linha da tabela
-                    tr.innerHTML = `
-                        <td>${columns[0] || ''}</td>
-                        <td>${columns[1] || ''}</td>
-                        <td>${columns[2] || ''}</td>
-                        <td>${columns[3] || ''}</td>
-                    `;
-                    tableBody.appendChild(tr);
-                });
-
-                // Se houver mais de 10 linhas no total, mostra o link "ver mais"
-                if (rows.length > 10) {
-                    viewMoreLink.style.display = 'block';
-                }
-
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: red;">Falha ao carregar os dados.</td></tr>';
+            if (currentId === 'strategy') {
+                 strategyLink.classList.add('active');
             }
-        }
-        fetchSheetData();
+        };
+
+        window.addEventListener('scroll', highlightNavOnScroll);
+        // Executa a função uma vez no carregamento da página para o caso de já estar numa secção
+        highlightNavOnScroll(); 
     });
 </script>
 
