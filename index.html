@@ -1,194 +1,452 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MundoBola Performance Report: Q1 - Q3 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Relatório de Performance - Mundo Bola Q3 2025</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Define Brand Identity via CSS Variables */
+        /* ------------------------- */
+        /* --- BRANDING & SETUP --- */
+        /* ------------------------- */
         :root {
-            --text-color: #24282A;
-            --header-color: #231372;
-            --highlight-color: #20E2C8;
-            --chart-purple: #6106AF;
-            --background-color: #f9fafb; /* bg-gray-50 */
+            --color-text: #24282A;
+            --color-header: #231372;
+            --color-highlight: #20E2C8;
+            --color-accent: #6106AF;
+            --color-positive: #28a745;
+            --color-negative: #dc3545;
+            --font-body: 'Figtree', sans-serif;
+            --font-heading: 'Barlow', sans-serif;
         }
 
-        /* Apply Base Font, Color, and Smoothing */
+        /* Reset Básico e Configuração Mobile-First */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Figtree', sans-serif;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Improved Readability for Paragraphs and Text */
-        p, li, th, td, .stat-label {
-            color: var(--text-color);
-        }
-
-        /* Apply Header Font and Styling */
-        h1, h2, h3 {
-            font-family: 'Barlow', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--header-color);
-            letter-spacing: 0.05em;
-        }
-
-        /* Style for the Section Header Highlighters */
-        .section-header::before {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background-color: var(--highlight-color);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Report Header Container with Shadow */
-        .report-header {
-            background-color: white;
-            padding: 1.5em;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center the logo */
-            height: 70px; /* Fixed height */
-            border-bottom: 1px solid #e5e7eb;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        /* Styling for logo */
-        .report-header svg {
-            height: 45px; /* Control logo size within the header */
-            width: auto;
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: #f4f7f9;
         }
         
-        /* Branded Button Style with Enhanced Feedback */
-        .report-button {
-            background-color: var(--highlight-color);
-            color: var(--header-color);
-            font-family: 'Barlow', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 0.75em 1.75em;
+        /* ------------------------- */
+        /* --- LAYOUT & ESTRUTURA --- */
+        /* ------------------------- */
+        .main-header {
+            background-color: #FFFFFF;
+            height: 70px;
+            padding: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .logo {
+            height: 40px; 
+            width: auto;
+        }
+
+        .main-content {
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .client-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .client-logo-container .client-logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .report-section {
+            background-color: #FFFFFF;
+            padding: 1.5rem;
             border-radius: 8px;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .report-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(32, 226, 200, 0.4);
-        }
-
-        /* Main Content Card Style */
-        .content-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
         }
         
-        /* Key Metric / Stat Styling */
-        .stat-card {
-            background-color: #f8f9ff;
-            border-left: 4px solid var(--highlight-color);
+        .grid-container {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-2-cols { grid-template-columns: 1fr; }
+        .grid-3-cols { grid-template-columns: 1fr; }
+
+        @media (min-width: 768px) {
+            .grid-2-cols { grid-template-columns: repeat(2, 1fr); }
+            .grid-3-cols { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* ------------------------- */
+        /* --- COMPONENTES --- */
+        /* ------------------------- */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-header);
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 2.2rem; line-height: 1.2; text-align: center; }
+        h2 { font-size: 1.8rem; margin-top: 2rem; border-bottom: 2px solid var(--color-highlight); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.3rem; color: var(--color-accent); text-transform: none; }
+        
+        p { font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; }
+        ul { list-style-position: inside; padding-left: 1rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .highlight { color: var(--color-highlight); }
+        .text-center { text-align: center; }
+
+        .kpi-card {
+            background-color: #f8f9fa;
             padding: 1.5rem;
             border-radius: 8px;
-        }
-
-        .stat-value {
-            font-family: 'Barlow', sans-serif;
-            color: var(--header-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        /* Enhanced Chart Styling */
-        .chart-wrapper {
-            position: relative;
-            height: 300px;
-            border-left: 2px solid #e5e7eb;
-            border-bottom: 2px solid #e5e7eb;
-            padding-top: 1.5rem;
-        }
-        .chart-container {
-            display: flex;
-            height: 100%;
-            align-items: flex-end;
-            gap: 1.5rem;
-            padding: 0 1rem;
-        }
-
-        .chart-bar-group {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             text-align: center;
         }
+        .kpi-value {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--color-header);
+        }
+        .kpi-label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .kpi-growth {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .positive { color: var(--color-positive); }
+        .negative { color: var(--color-negative); }
 
-        .chart-bar {
+        .chart-placeholder {
             width: 100%;
-            border-radius: 6px 6px 0 0;
-            transition: filter 0.2s ease;
-            cursor: pointer;
+            height: 300px;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            color: #adb5bd;
         }
-        .chart-bar:hover {
-            filter: brightness(1.15);
+        
+        /* Tabela */
+        .table-wrapper {
+            overflow-x: auto;
         }
-
-        .chart-label {
-            margin-top: 0.75rem;
-            font-family: 'Figtree', sans-serif;
-            font-weight: 600;
-            color: var(--text-color);
-            font-size: 0.875rem;
-        }
-
-        /* Table Styling */
-        .report-table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
-            overflow-x: auto;
-            display: block;
+            margin-top: 1rem;
         }
-        .report-table thead {
-            background-color: #f8f9ff;
-        }
-        .report-table th, .report-table td {
-            padding: 0.75rem 1rem;
+        .data-table th, .data-table td {
+            padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-            white-space: nowrap;
+            border-bottom: 1px solid #dee2e6;
         }
-        .report-table th {
-            font-family: 'Barlow', sans-serif;
-            font-weight: 700;
-            color: var(--header-color);
+        .data-table th {
+            background-color: var(--color-header);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
             text-transform: uppercase;
         }
-        .report-table tbody tr:hover {
-            background-color: #f9fafb;
+        .data-table tr:nth-of-type(even) {
+            background-color: #f8f9fa;
+        }
+        .data-table td:nth-child(3), .data-table td:nth-child(5), .data-table td:nth-child(7) {
+            font-weight: 700;
+        }
+
+        /* Gráfico de Barras Horizontais */
+        .bar-chart-container {
+            list-style: none;
+            padding: 0;
+        }
+        .bar-chart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .bar-label {
+            width: 120px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        .bar-wrapper {
+            flex-grow: 1;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        .bar {
+            height: 20px;
+            background-color: var(--color-accent);
+            border-radius: 4px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+        }
+        
+        .strategy-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .strategy-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 1rem;
+        }
+        .strategy-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--color-highlight);
+            font-weight: bold;
         }
 
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
-    <header class="report-header">
-        <svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 837.7 245.66" role="img" aria-labelledby="company-logo-title">
-            <title id="company-logo-title">MundoBola Logo</title>
-            <defs>
-                <style>
-                    .cls-1-svg { fill: none; }
-                    .cls-2-svg { clip-path: url(#cl
+    <header class="main-header">
+        <svg class="logo" viewBox="0 0 837.7 245.66" xmlns="http://www.w.org/2000/svg" ...>
+            </svg>
+    </header>
+
+    <main class="main-content">
+    
+        <div class="client-logo-container">
+            <svg class="client-logo" viewBox="0 0 454.1 151.17" xmlns="http://www.w3.org/2000/svg">
+                 </svg>
+        </div>
+        
+        <h1>Análise de Performance <span class="highlight">Q1-Q3 2025</span></h1>
+        <p class="text-center">Relatório preparado por: Carlota Sousa | Outubro 2025</p>
+
+        <section class="report-section">
+            <h2>Visão Geral do Tráfego</h2>
+            <div class="grid-container grid-2-cols">
+                <div class="kpi-card">
+                    <div class="kpi-label">Total de Sessões</div>
+                    <div class="kpi-value">1.1M</div>
+                    <div class="kpi-growth positive">+37.15%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Total de Pageviews</div>
+                    <div class="kpi-value">1.64M</div>
+                    <div class="kpi-growth positive">+40.46%</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Análise de Tráfego por Canal</h2>
+            <div class="grid-container grid-3-cols">
+                <div class="quarter-card">
+                    <h3>Q1 2025</h3>
+                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q1]</div>
+                    </div>
+                <div class="quarter-card">
+                    <h3>Q2 2025</h3>
+                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q2]</div>
+                    </div>
+                <div class="quarter-card">
+                    <h3>Q3 2025</h3>
+                    <div class="chart-placeholder">[GRÁFICO ANEL: FONTES DE TRÁFEGO Q3]</div>
+                     </div>
+            </div>
+        </section>
+
+        <section class="report-section">
+            <h2>Performance Orgânica (Google Search Console)</h2>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Trimestre</th>
+                            <th>Cliques</th>
+                            <th>Var. (%)</th>
+                            <th>Impressões</th>
+                            <th>Var. (%)</th>
+                            <th>Posição Média</th>
+                            <th>Var.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q1 2025</td>
+                            <td>190,716</td>
+                            <td>-</td>
+                            <td>14,105,336</td>
+                            <td>-</td>
+                            <td>9.83</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Q2 2025</td>
+                            <td>312,169</td>
+                            <td class="positive">64%</td>
+                            <td>28,572,951</td>
+                            <td class="positive">103%</td>
+                            <td>8.72</td>
+                            <td class="positive">-1.11</td>
+                        </tr>
+                        <tr>
+                            <td>Q3 2025</td>
+                            <td>594,105</td>
+                            <td class="positive">90%</td>
+                            <td>56,328,565</td>
+                            <td class="positive">97%</td>
+                            <td>9.18</td>
+                            <td class="negative">+0.46</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid-container grid-2-cols" style="margin-top: 2rem;">
+                 <div class="chart-placeholder">[GRÁFICO DE LINHA: CLIQUES ORGÂNICOS]</div>
+                 <div class="chart-placeholder">[GRÁFICO DE LINHA: POSIÇÃO MÉDIA]</div>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Cliques de Afiliados por Marca</h2>
+            <div class="grid-container grid-3-cols">
+                <div class="quarter-card">
+                    <h3>Q1: 145 cliques</h3>
+                    <ul class="bar-chart-container">
+                        <li class="bar-chart-item"><span class="bar-label">Galerabet</span><div class="bar-wrapper"><div class="bar" style="width: 100%;">34</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Esportes da Sorte</span><div class="bar-wrapper"><div class="bar" style="width: 64.7%;">22</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Alfa.bet</span><div class="bar-wrapper"><div class="bar" style="width: 47%;">16</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Superbet</span><div class="bar-wrapper"><div class="bar" style="width: 47%;">16</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Bet365</span><div class="bar-wrapper"><div class="bar" style="width: 38.2%;">13</div></div></li>
+                    </ul>
+                </div>
+                <div class="quarter-card">
+                    <h3>Q2: 313 cliques <span class="positive">(+115%)</span></h3>
+                    <ul class="bar-chart-container">
+                        <li class="bar-chart-item"><span class="bar-label">Bet365</span><div class="bar-wrapper"><div class="bar" style="width: 100%;">69</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Galerabet</span><div class="bar-wrapper"><div class="bar" style="width: 65.2%;">45</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Superbet</span><div class="bar-wrapper"><div class="bar" style="width: 62.3%;">43</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Esportes da Sorte</span><div class="bar-wrapper"><div class="bar" style="width: 60.8%;">42</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Alfa.bet</span><div class="bar-wrapper"><div class="bar" style="width: 37.7%;">26</div></div></li>
+                    </ul>
+                </div>
+                <div class="quarter-card">
+                    <h3>Q3: 531 cliques <span class="positive">(+70%)</span></h3>
+                    <ul class="bar-chart-container">
+                        <li class="bar-chart-item"><span class="bar-label">Bet365</span><div class="bar-wrapper"><div class="bar" style="width: 100%;">94</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Superbet</span><div class="bar-wrapper"><div class="bar" style="width: 88.3%;">83</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Galerabet</span><div class="bar-wrapper"><div class="bar" style="width: 73.4%;">69</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Esportes da Sorte</span><div class="bar-wrapper"><div class="bar" style="width: 72.3%;">68</div></div></li>
+                        <li class="bar-chart-item"><span class="bar-label">Alfa.bet</span><div class="bar-wrapper"><div class="bar" style="width: 46.8%;">44</div></div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Funil de Conversão (Q3)</h2>
+            <p class="text-center">Evolução mensal de Cliques, Registos e FTDs.</p>
+            <div class="chart-placeholder">[GRÁFICO DE BARRAS AGRUPADAS: CONVERSÕES MENSAIS]</div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Esforço vs. Recompensa (1º Semestre)</h2>
+            <div class="grid-container grid-2-cols">
+                <div class="effort-reward-card">
+                    <h3>Publicações vs. Cliques</h3>
+                    <div class="chart-placeholder">[GRÁFICO COMBINADO: BARRAS E LINHA]</div>
+                </div>
+                <div class="effort-reward-card">
+                    <h3>Taxa de Conversão por Categoria</h3>
+                    <div class="chart-placeholder">[GRÁFICO DE BARRAS: CR%]</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Top Páginas por Cliques de Afiliados (Q3)</h2>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Tipo</th>
+                            <th>Cliques Afiliado</th>
+                            <th>Duração Média Sessão</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>/apostas-brasil/mines-aposta/</td><td>post</td><td>51</td><td>31.76s</td></tr>
+                        <tr><td>/apostas-brasil/casas-de-apostas/</td><td>category</td><td>15</td><td>465.01s</td></tr>
+                        <tr><td>/apostas-brasil/analise-alfa-bet/</td><td>review</td><td>14</td><td>47.50s</td></tr>
+                        <tr><td>/apostas-brasil/sites-apostas-transmissao-ao-vivo/</td><td>post</td><td>13</td><td>60.69s</td></tr>
+                        <tr><td>/apostas-brasil/blaze-apostas-review/</td><td>review</td><td>12</td><td>17.45s</td></tr>
+                        <tr><td>/apostas-brasil/analise-bet365/</td><td>review</td><td>11</td><td>42.09s</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="report-section">
+            <h2>Estratégia e Próximos Passos (2º Semestre)</h2>
+            <div class="grid-container grid-2-cols">
+                <div>
+                    <h3>01. Escalar Conversão</h3>
+                    <ul class="strategy-list">
+                        <li>Aumentar a produção de conteúdos de apostas para 3 por semana.</li>
+                        <li>Continuar o roadmap de otimização de conteúdos evergreen antigos.</li>
+                        <li>Rever estrutura de links internos para aumentar autoridade das páginas.</li>
+                        <li>Iniciar estratégia de backlinks.</li>
+                        <li>Criar mais páginas de conversão (rankings "os melhores").</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>02. Criar Páginas Dinâmicas</h3>
+                    <ul class="strategy-list">
+                        <li>Criar páginas de ferramentas de apostas com IA.</li>
+                    </ul>
+                    <h3>03. Teste: Conteúdo Evolutivo</h3>
+                    <ul class="strategy-list">
+                        <li>Transformar conteúdo "fora de prazo" (palpites) em conteúdo histórico que gera tráfego ao longo do tempo.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+</body>
+</html>
